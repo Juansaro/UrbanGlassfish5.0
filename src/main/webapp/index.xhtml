@@ -1,0 +1,390 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Urban barber shop</title>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+        <meta name="description" content=""></meta>
+        <meta name="author" content="Mauricio Romero, Juan Sarmiento, Brikman Morales"></meta>
+        <title>Urban Barber Shop</title>
+        <!-- Bootstrap core CSS -->
+        <h:outputStylesheet library="CSS" name="bootstrap.min.css"></h:outputStylesheet>
+        <!-- Custom styles for this template -->
+        <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900" rel="stylesheet"></link>
+        <!-- Custom styles for this template -->
+        <h:outputStylesheet library="CSS" name="blog.css"></h:outputStylesheet>
+    </h:head>
+    <h:body>
+        <p:growl id="growl" life="3000"/>
+        <div class="container">
+            <header class="blog-header py-3">
+                <div class="row flex-nowrap justify-content-between align-items-center">
+                    <div class="col-4 pt-1">
+
+                        <button 
+                            type="button" 
+                            class="btn btn-dark"
+                            data-toggle="modal" 
+                            data-target="#exampleModal2"
+                            >
+                            Iniciar sesión
+                        </button>
+
+                    </div>
+                    <div class="col-4 text-center">
+                        <a class="blog-header-logo text-white" href="#">Urban Barber Shop</a>
+                    </div>
+                    <div class="col-4 d-flex justify-content-end align-items-center">
+
+                        <button 
+                            type="button" 
+                            class="btn btn-success"
+                            data-toggle="modal" 
+                            data-target="#exampleModal1"
+                            >
+                            Registrarse
+                        </button>
+
+                        <br />
+
+                    </div>
+                </div>
+            </header>
+
+            <div class="nav-scroller py-1 mb-2">
+                <nav class="nav d-flex justify-content-between">
+                    <a class="lang p-2 text-muted" key="inicio" href="index.html"><b>Inicio</b></a>
+
+                    <div class="lang p-2 text-danger" key="servicios" href="servicios.html"><b>Servicios</b></div>
+
+                    <a class="lang p-2 text-danger" key="agendarTuCita" href="iniciarsesion.html"><b>Agenda tu cita</b></a>
+                    <a class="lang p-2 text-danger" key="nuestroEquipo" href="404.html"><b>Nuestro equipo</b></a>
+                    <a class="lang p-2 text-danger" key="contacto" href="contacto.html"><b>Contacto</b></a>
+                </nav>
+            </div>
+
+            <div id="fondo_banner" class="jumbotron p-4 p-md-5 text-white rounded fondo_banner">
+                <div class="col-md-12 px-0">
+                    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                
+                                <img src="resources/img/fondoprueba.jpg" class="d-block w-100" alt="..." width="620px" height="550px"></img>
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3 class="lang display-4 font-italic tex" style="color:#ffffff" key="dondeLosHombres...">Donde los
+                                        hombres se vuelven hombres</h3>
+                                    <p class="lang lang my-3" key="estasAUnCorte..." style="color:#ffffff">Estas a un corte de ser la mejor
+                                        version de ti mismo</p>
+                                    <p class="lang mb-0"><a href="#" class="lang text-white font-weight-bold" style="color:#ffffff"
+                                                            key="agendarTuCita2">Agenda tu cita</a></p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/banner1.jpg" class="d-block w-100" alt="..." width="620px" height="550px"></img>
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3 class="lang display-4 font-italic tex" style="color:#ffffff" key="dondeLosHombres...">Donde los
+                                        hombres se vuelven hombres</h3>
+                                    <p class="lang lang my-3" key="estasAUnCorte..." style="color:#ffffff">Estas a un corte de ser la mejor
+                                        version de ti mismo</p>
+                                    <p class="lang mb-0"><a href="#" class="lang text-white font-weight-bold" style="color:#ffffff"
+                                                            key="agendarTuCita2">Agenda tu cita</a></p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/Fondo.jpg" class="d-block w-100" alt="..." width="620px" height="550px"></img>
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3 class="lang display-4 font-italic tex" style="color:#ffffff" key="dondeLosHombres...">Donde los
+                                        hombres se vuelven hombres</h3>
+                                    <p class="lang lang my-3" key="estasAUnCorte..." style="color:#ffffff">Estas a un corte de ser la mejor
+                                        version de ti mismo</p>
+                                    <p class="lang mb-0"><a href="#" class="lang text-white font-weight-bold" style="color:#ffffff"
+                                                            key="agendarTuCita2">Agenda tu cita</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <div
+                        class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-danger">Tips</strong>
+                            <h3 class="lang mb-0 text-white" key="ciudadoDelCabello">Cuidado del cabello</h3> <br></br>
+                            <ul>
+                                <li class="text-white">
+                                    <p class="lang card-text mb-auto text-white" key="eligeElAguaTibia">Elije el agua tibia</p>
+                                </li>
+                                <li class="text-white">
+                                    <p class="lang card-text mb-auto text-white" key="noDebesAcostarte..">No debes acostarte con el pelo
+                                        mojado.</p>
+                                </li>
+                            </ul>
+                            <a href="servicios.html" class="lang stretched-link" key="servicioDeCorte">Servicio de Corte</a>
+                        </div>
+                        <div class="col-auto d-none d-lg-block">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div
+                        class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-danger">Tips</strong>
+                            <h3 class="lang mb-0 text-white" key="cuidadoDeLaBarba">Cuidado de la barba</h3>
+                            <ul>
+                                <li class="text-white">
+                                    <p class="lang mb-auto text-white" key="lavaTuBarba...">Lava tu barba cada día</p>
+                                </li>
+                                <li class="text-white">
+                                    <p class="lang mb-auto text-white" key="secaTuBarba...">Seca tu barba, no la dejes mojada</p>
+                                </li>
+                                <li class="text-white">
+                                    <p class="lang mb-auto text-white" key="nutreEHidrata">Nutre e hidrata la piel con productos específicos
+                                        para barba</p>
+                                </li>
+                            </ul>
+                            <a href="servicios.html" class="lang stretched-link" key="servicioDeArreglo...">Servicio de Arreglo de
+                                Barba</a>
+                        </div>
+                        <div class="col-auto d-none d-lg-block">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main role="main" class="container">
+            <div class="row">
+                <div class="col-md-8 blog-main">
+                    <h3 class="lang pb-4 mb-4 font-italic border-bottom text-danger" key="noticiaDeInteres">
+                        Noticia de interes
+                    </h3>
+
+                    <div class="blog-post">
+                        <h2 class="lang blog-post-title text-white" key="estamosTrabajandoPara...">"Estamos trabajando para
+                            agremiarnos y volvernos visibles ante el Gobierno"</h2>
+                        <p class="lang blog-post-meta " key="domingo4DeMarzo...">Domingo, 4 de marzo de 2021</p>
+
+                        <p class="lang text-white" key="segunConfecamaras...">Según Confecámaras, hay 44.432 negocios registrados y
+                            Fenalco indicó que dos meses de cuarentena dejan pérdidas por $960.000 millones.</p>
+                        <hr></hr>
+                        <p class="lang text-white" key="conLasNuevasExcepciones...">Con las nuevas excepciones establecidas por el
+                            Gobierno para la reactivación de la economía por sectores, se permitió abrir operaciones a las peluquerías
+                            con previa validación de los protocolos de bioseguridad por la administración local. De cara a la
+                            reapertura, los empresarios del sector buscan trabajar en un gremio para tener más visibilidad ante las
+                            autoridades y trabajar en la formalización del sector.</p>
+                        <blockquote>
+                            <p class="lang text-white" key="laImportanciaDeEsta...">La importancia de esta iniciativa radica,
+                                principalmente, en el peso que tiene esta actividad en la economía. Según Confecámaras, en el país hay
+                                44.432 establecimientos registrados, Fenalco reportó unas 70.000 peluquerías y el informe de Micronegocios
+                                del Dane (cuenta las unidades económicas con máximo nueve personas) señaló que hay 261.00. La diferencia
+                                en los datos muestra la gran informalidad del sector.</p>
+                        </blockquote>
+                        <p class="lang text-white" key="precisamente,LaPandemia...">Precisamente, la pandemia ha mostrado que uno de
+                            los retos que enfrentan es la formalización. Franklin Ramos, asesor de imagen y estilista, expresó a LR que
+                            trabajan para conformar un gremio y de esta manera organizarse como industria, pues “somos unas de las más
+                            importantes del país (...) Estamos trabajando para agremiarnos y volvernos visibles ante el Gobierno. Esto
+                            se hace para que todos los estilistas que están de manera informal entiendan que somos una industria.
+                            Tenemos que organizarnos como empresas, si no lo hacemos y no nos mostramos como negocios serios, como somos
+                            muchos de nosotros, no vamos a ver cambio. Esta situación lo más importante que deja es eso”, expresó.</p>
+                    </div><!-- /.blog-post -->
+
+                </div><!-- /.blog-main -->
+
+                <aside class="col-md-4 blog-sidebar ">
+                    <div class="p-4 mb-3 bg-light rounded">
+                        <h4 class="lang font-italic" key="contacto2">Contacto</h4>
+                        <p class="lang mb-0" key="Ubicacion"><b>Ubicacion: </b>Bogota, Colombia</p>
+                        <p class="lang mb-0" key="direccion"><b>Direccion: </b>Avenida Siempreviva 742</p>
+                        <p class="lang mb-0" key="telefono"><b>Telefono: </b>3216549870</p>
+
+                    </div>
+
+                    <div class="p-4 text-white">
+                        <h4 class="lang font-italic" key="redesSociales">Redes Sociales</h4>
+                        <ol class="list-unstyled">
+                            <li class="lang" key="sigenos"><a href="#"></a>Síguenos</li>
+                            <li><a href="https://twitter.com/?lang=es">Twitter</a></li>
+                            <li><a href="https://es-la.facebook.com/">Facebook</a></li>
+                            <li><a href="https://www.tiktok.com/es">Tik Tok</a></li>
+                            <li><a href="https://www.instagram.com/?hl=es-la">Instagram</a></li>
+                        </ol>
+                    </div>
+                </aside><!-- /.blog-sidebar -->
+
+            </div><!-- /.row -->
+
+        </main><!-- /.container -->
+
+        <footer class="blog-footer">
+            <p class="lang" key="derechosReservados">Derechos reservados <a href="index.html">Urban Barber Shop</a> 2021.</p>
+            <p>
+                <a href="#" class="lang" key="RegresarArriba">Regresar arriba</a>
+            </p>
+        </footer>
+
+        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Iniciar sesión</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h:form>
+                        <h:inputText value="#{usuarioSesion.correoUsuario}" requiredMessage="Se requiere un correo valido !!" required="true" html5:placeholder="Correo Electronico" class="form-control" />
+                        <br/>
+                        <h:inputSecret value="#{usuarioSesion.contrasena}" requiredMessage="Se requiere una clave valido !!"  required="true" html5:placeholder="Clave" class="form-control" />
+                        <br/>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <h:commandButton action="#{usuarioSesion.validarUsuario()}" class="btn btn-primary btn-lg btn-block mb-3" value="Ingresar"/>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                    <h:link >
+                        <div class="lang btn btn-sm btn-outline-success" style="cursor: pointer;" key="recu"><a  data-toggle="modal" data-target="#recuperar" href="#">Recuperar clave</a>
+                        </div>
+                    </h:link>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Iniciar sesión.</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h:form>
+                        <div class="modal-body">
+                            <h:outputLabel value="Nombre:" for="nombre" />
+                            <br/>
+                            <h:inputText id="nombre" value="#{usuarioSesion.usuReg.nombre}" required="true" html5:placeholder="Nombre" class="form-control"/>
+                            <br/>
+                            <h:outputLabel value="Apellido:" for="apellido" />
+                            <br/>
+                            <h:inputText id="apellido" value="#{usuarioSesion.usuReg.apellido}" required="true" html5:placeholder="Apellido" class="form-control"/>
+                            <br/>
+                            <h:outputLabel value="Correo:" for="correo" />
+                            <br/>
+                            <h:inputText id="correo" value="#{usuarioSesion.usuReg.correo}" required="true" html5:placeholder="Correo" class="form-control"/>
+                            <br/>
+                            <h:outputLabel value="Contrasena:" for="contrasena" />
+                            <br/>
+                            <h:inputSecret id="contrasena" value="#{usuarioSesion.usuReg.contrasena}" required="true" html5:placeholder="contraseña" class="form-control"/>
+                            <br/>
+                            <h:outputLabel value="Ciudad:" for="tipoIdentificacionIdTipoIdentificacion" />
+                            <h:selectOneMenu class="form-control" id="tipoIdentificacionIdTipoIdentificacion" value="#{usuarioSesion.ciudad.numeroCiudad}" required="true" >
+                                <f:selectItems value="#{usuarioSesion.ciudades}" var="ciu" itemLabel="#{ciu.nombreCiudad}" itemValue="#{ciu.numeroCiudad}"/>
+                            </h:selectOneMenu>
+                            <br/>
+                            <h:outputLabel value="Tipo identificación:" for="tipoIdentificacion" />
+                            <h:selectOneMenu class="form-control" id="tipoIdentificacion" value="#{usuarioSesion.tipoIdentificacion.idTipoIdentificacion}" required="true">
+                                <f:selectItems value="#{usuarioSesion.tipoIdentificaciones}" var="ide" itemLabel="#{ide.descripcion}" itemValue="#{ide.idTipoIdentificacion}"/>
+                            </h:selectOneMenu>
+                            <br/>
+                            <h:outputLabel value="Número documento:" for="numDocumento" />
+                            <br/>
+                            <h:inputText id="numDocumento" value="#{usuarioSesion.usuReg.numeroDocumento}" required="true" html5:placeholder="Número documento" class="form-control"/>
+                            <br/>
+                            <h:outputLabel value="Tipo telefono:" for="tipoTelefono" />
+                            <h:selectOneMenu class="form-control" id="tipoTelefono" value="#{usuarioSesion.tipoTelefono.numeroTipoTelefono}" required="true">
+                                <f:selectItems value="#{usuarioSesion.tipoTelefonos}" var="tel" itemLabel="#{tel.descripcion}" itemValue="#{tel.numeroTipoTelefono}"/>
+                            </h:selectOneMenu>
+                            <br/>
+                            <h:outputLabel value="Número telefono:" for="tipoTelefono" />
+                            <br/>
+                            <h:inputText value="#{usuarioSesion.usuReg.numeroTelefono}" required="true" html5:placeholder="Número telefono" class="form-control"/>
+                            <br/>
+
+                            <h:commandLink action="#{usuarioSesion.registrarUsuario()}" class="btn btn-primary btn-lg btn-block text-white rounded-pill" value="Registrar.">
+                            </h:commandLink>
+                        </div>
+                    </h:form>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="recuperar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Recuperar clave</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h:form>
+
+                        <h:inputText value="#{usuarioSesion.correoIn}" required="true" html5:placeholder="Correo Electronico" class="form-control" />
+
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <h:commandButton onclick="Swal.fire({
+                                                    position: 'top-end',
+                                                    icon: 'info',
+                                                    title: 'Enviando correo !!!!',
+                                                    showConfirmButton: false,
+                                                    timer: 3000
+                                                })" action="#{usuarioSesion.recuperarClave()}" class="btn btn-dark btn-lg m-3" value="Recordar!">
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+        <script src="#{request.contextPath}/resources/JS/idiomas.js"/>
+
+        <br />
+
+    </h:body>
+</html>
+

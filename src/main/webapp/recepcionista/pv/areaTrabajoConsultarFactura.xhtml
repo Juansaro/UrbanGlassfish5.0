@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+
+        <div class="card container mt-3 mb-3" style="max-width: 80rem;" id="carta">
+            <div class="row">
+                <div class="col">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold text-white">Consultar facturas</h5>
+                        <hr class="bg-white"/>
+                        <p:growl id="growl" life="3000"/>
+                        <h:form styleClass="jsfcrud_list_form">         
+                            <p:dataTable id="tabla" emptyMessage="Ninguna factura registrada" value="#{facturaSesion.facturas}" 
+                                         var="f" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                                         >
+
+                                <p:column headerText="Fecha de la cita" filterBy="#{f.citaIdCita.fechaCita}" filterMatchMode="contains" >
+                                    <h:outputText value="#{f.citaIdCita.fechaCita}"  >
+                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss"/>
+                                    </h:outputText>
+                                </p:column> 
+
+                                <p:column headerText="Barbero" filterBy="#{f.citaIdCita.idBarbero.nombre}" filterMatchMode="contains" >
+                                    <h:outputText value="#{f.citaIdCita.idBarbero.nombre} #{f.citaIdCita.idBarbero.apellido}"  /> 
+                                </p:column>
+
+                                <p:column headerText="Servicios"> 
+                                    <ui:repeat value="#{f.citaIdCita.servicioCollection}" var="servicios">
+                                        <h:outputText value="#{servicios.toString()}" /><br/>
+                                    </ui:repeat>
+                                </p:column>
+
+                                <p:column headerText="Costo" filterBy="#{f.costo}" filterMatchMode="contains" >
+                                    <h:outputText value="#{f.costo}"  /> 
+                                </p:column>
+
+                                <p:column headerText=" " exportable="false" >
+
+                                    <h:commandLink class="btn btn-danger rounded-pill" action="#{facturaSesion.eliminarFactura(f)}" value="Eliminar"/>
+
+                                </p:column>  
+
+                            </p:dataTable>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ui:composition>
+</html>
+

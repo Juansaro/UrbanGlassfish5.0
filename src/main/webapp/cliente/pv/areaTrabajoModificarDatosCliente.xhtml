@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <div class="card container mt-3 mb-3" style="max-width: 50rem;" id="carta">
+            <div class="row">
+                <div class="col">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold text-white">Consultar / modificar tus datos</h5>
+                        <hr class="bg-white"/>
+                        <h:form styleClass="jsfcrud_list_form">
+                            <p:growl id="growl" life="3000"/>
+                            <h:outputLabel value="Nombre:" for="nombre" />
+                            <h:inputText id="nombre" value="#{usuarioSesion.usuLog.nombre}" required="true" html5:placeholder="Nombre" class="form-control"/>
+
+                            <h:outputLabel value="Apellido:" for="apellido" />
+                            <h:inputText id="apellido" value="#{usuarioSesion.usuLog.apellido}" required="true" html5:placeholder="Apellido" class="form-control"/>
+
+                            <h:outputLabel value="Correo:" for="correo" />
+                            <h:inputText id="correo" value="#{usuarioSesion.usuLog.correo}" required="true" html5:placeholder="Correo" class="form-control"/>
+
+                            <h:outputLabel value="Contrasena:" for="contrasena" />
+                            <h:inputText id="contrasena" value="#{usuarioSesion.usuLog.contrasena}" required="true" html5:placeholder="contraseña" class="form-control"/>
+
+                            <h:outputLabel value="Ciudad" for="tipoIdentificacionIdTipoIdentificacion" />
+                            <h:selectOneMenu class="form-control" id="tipoIdentificacionIdTipoIdentificacion" value="#{usuarioSesion.ciudad.numeroCiudad}" required="true" >
+                                <f:selectItems value="#{usuarioSesion.ciudades}" var="ciu" itemLabel="#{ciu.nombreCiudad}" itemValue="#{ciu.numeroCiudad}"/>
+                            </h:selectOneMenu>
+                           
+                            <h:outputLabel value="Tipo identificacion:" for="tipoIdentificacion" />
+                            <h:selectOneMenu class="form-control" id="tipoIdentificacion" value="#{usuarioSesion.tipoIdentificacion.idTipoIdentificacion}" required="true">
+                                <f:selectItems value="#{usuarioSesion.tipoIdentificaciones}" var="ide" itemLabel="#{ide.descripcion}" itemValue="#{ide.idTipoIdentificacion}"/>
+                            </h:selectOneMenu>
+
+                            <h:outputLabel value="Tipo telefono:" for="tipoTelefono" />
+                            <h:selectOneMenu class="form-control" id="tipoTelefono" value="#{usuarioSesion.tipoTelefono.numeroTipoTelefono}" required="true">
+                                <f:selectItems value="#{usuarioSesion.tipoTelefonos}" var="tel" itemLabel="#{tel.descripcion}" itemValue="#{tel.numeroTipoTelefono}"/>
+                            </h:selectOneMenu>
+
+                            <h:outputLabel value="Numero de documento:" for="numeroDocumento" />
+                            <h:inputText id="numeroDocumento" value="#{usuarioSesion.usuLog.numeroDocumento}" required="true" html5:placeholder="Número documento" class="form-control"/>
+
+                            <h:outputLabel value="Numero de telefono:" for="numeroTelefono" />
+                            <h:inputText id="numeroTelefono" value="#{usuarioSesion.usuLog.numeroTelefono}" required="true" html5:placeholder="Número telefono" class="form-control"/>
+                            <br/>
+                            <h:commandButton action="#{usuarioSesion.editarCliente()}" class="btn btn-warning btn-lg btn-block text-white rounded-pill" value="Modificar.">
+                            </h:commandButton>
+
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+

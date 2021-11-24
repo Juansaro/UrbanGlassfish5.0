@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:composition>
+        <p:growl id="growl" life="3000"/>
+        <div class="card container mt-3 mb-3" style="max-width: 70rem;" id="carta">
+            <div class="row">
+                <div class="col">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold text-white lang" key="l">Compras</h5>
+                        <br/>
+                        <h:form >
+                            <p:dataTable id="tabla" emptyMessage="Ningun despacho registrado" value="#{compraSesion.compras}" 
+                                         var="item" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                                         >
+                                <p:column headerText="fecha de compra" >
+                                    <h:outputText value="#{item.fechaSolicitud}"  >
+                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss"/>
+                                    </h:outputText>
+                                </p:column>
+                                
+                                <p:column headerText="Proveedor" >
+                                    <h:outputText value="#{item.numeroProveedor.nombre} #{item.numeroProveedor.apellidos}"  /> 
+                                </p:column>
+                                
+                                <p:column headerText="Recepcionista" >
+                                    <h:outputText value="#{item.recepcionista.nombre} #{item.recepcionista.apellido}"  /> 
+                                </p:column>
+                                
+                                <p:column headerText=" " exportable="false" >
+                                    <h:commandButton class="btn btn-dark rounded-pill"
+                                                     html5:data-toggle="modal"
+                                                     html5:data-target="#informacion" 
+                                                     action="#{compraSesion.consultarDetallesCompras(item)}" 
+                                                     value="Consultar productos" >
+                                        <f:ajax render=":formActualizar"> </f:ajax>
+                                    </h:commandButton>
+                                </p:column>
+
+                            </p:dataTable>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+        <div class="modal fade" id="informacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Selecciona un producto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h:form id="formActualizar">
+                        <div class="modal-body">
+                            <div class="row">                                
+                                <c:forEach items="#{compraSesion.detallesSolicitados}" var="d" varStatus="act">
+                                    <div class="col-lg-5">
+                                            <div class="card text-dark">
+                                                <div class="card-header border-0">
+                                                    Producto despachado
+                                                    <h3 class="card-title">#{d.productoIdProducto.nombreProducto}</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    Descripcion
+                                                    <h4 class="card-title">#{d.productoIdProducto.descripcion}</h4>
+                                                    Costo unitario
+                                                    <h4 class="card-title">#{d.productoIdProducto.precio}</h4>
+                                                    Cantidad comprada
+                                                    <h4 class="card-title">#{d.cantidadSolicitada}</h4>
+                                                    Costo total del detalle de compra
+                                                    <h4 class="card-title">#{d.costoTotal}</h4>
+                                                    <!--No olvidar colocar foto aquí-->
+                                                </div>
+                                            </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
+
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </ui:composition>
+</html>
+

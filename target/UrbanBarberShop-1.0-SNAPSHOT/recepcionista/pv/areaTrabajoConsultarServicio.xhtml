@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition>
+        <p:growl id="growl" life="3000"/>
+        <div class="card container mt-3 mb-3" style="max-width: 55rem;" id="carta">
+            <div class="row">
+                <div class="col">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold text-white">Lista de servicios</h5>
+                        <button type="button" class="btn btn-success mt-3 mb-3 mr3" data-toggle="modal" data-target="#registrar">
+                            Registrar servicio
+                        </button>
+                        <br/>
+                        <h:form id="frmPrincipal">
+                            <p:dataTable id="tabla" emptyMessage="Ningún servicio registrado" value="#{servicioView.servicios}" 
+                                         var="s" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                                         >
+                                
+                                <p:column headerText="">
+                                    <p:graphicImage 
+                                        height="50px"
+                                        width="50px"
+                                        class="rounded mx-auto d-block"
+                                        id="fotoPerfil"
+                                        value="/ImgServletServicio/#{s.servicioFoto}"
+                                        />
+                                </p:column>
+
+                                <p:column headerText="foto">
+                                    <h:commandButton 
+                                        class="btn btn-dark rounded-pill"
+                                        html5:data-toggle="modal"
+                                        html5:data-target="#foto" 
+                                        action="#{servicioView.guardarFotoTemporal(s)}" 
+                                        value="foto" >
+                                        <f:ajax render=":frmFoto"> </f:ajax>
+                                    </h:commandButton>
+                                </p:column>
+                                
+                                <p:column headerText="Nombre" filterBy="#{s.nombre}" filterMatchMode="Nombre" >
+                                    <h:outputText value="#{s.nombre}"  /> 
+                                </p:column>
+
+                                <p:column headerText="Descripción" >
+                                    <h:outputText value="#{s.descripcion}"  /> 
+                                </p:column>
+
+                                <p:column headerText="Costo" >
+                                    <h:outputText value="#{s.costo}"  /> 
+                                </p:column>
+
+                                <p:column headerText=" " exportable="false" >
+
+                                    <h:commandButton class="btn btn-warning rounded-pill"
+                                                     html5:data-toggle="modal"
+                                                     html5:data-target="#exampleModal"
+                                                     action="#{servicioView.guardarTemporal(s)}"  
+                                                     value="Editar" >
+                                        <f:ajax render=":frmActualizar"> </f:ajax>
+                                    </h:commandButton>
+
+                                </p:column>
+
+                                <p:column headerText=" " exportable="false" >
+
+                                    <h:commandLink class="btn btn-danger rounded-pill" action="#{servicioView.eliminarServicio(s)}" value="Eliminar"/>
+
+                                </p:column>  
+
+                            </p:dataTable>
+
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog text-dark">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Registrar servicio</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h:form id="frmActualizar">
+                        <div class="modal-body"> 
+                            <h:outputLabel class="card-text font-weight-bold" value="Nombre" for="nombreProducto" />
+                            <h:inputText value="#{servicioView.serTemporal.nombre}" required="true" html5:placeholder="Nombre" id="nombre" class="form-control"/><br/>
+                            
+                            <h:outputLabel class="card-text font-weight-bold" value="Descripción" for="descripcion" />
+                            <h:inputText value="#{servicioView.serTemporal.descripcion}" class="form-control" id="descripcion" required="true" html5:placeholder="Descripción" /><br/>
+
+                            <h:outputLabel class="card-text font-weight-bold" value="Costo" for="costo" />
+                            <h:inputText value="#{servicioView.serTemporal.costo}" class="form-control" id="costo" html5:placeholder="Costo" /><br/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <h:commandButton action="#{servicioView.editarServicio()}" class="btn btn-primary" value="Editar.">
+                            </h:commandButton>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="registrar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog text-dark">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Registrar servicio</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                        </button>
+                    </div>
+                    <h:form>
+                        <div class="modal-body"> 
+                            <h:outputLabel class="card-text font-weight-bold" value="Nombre" for="nombre" />
+                            <h:inputText value="#{servicioView.ser.nombre}" required="true" html5:placeholder="Nombre" id="nombre" class="form-control"/><br/>
+                            
+                            <h:outputLabel class="card-text font-weight-bold" value="Descripción" for="descripcion" />
+                            <h:inputText value="#{servicioView.ser.descripcion}" class="form-control" id="descripcion" required="true" html5:placeholder="Descripción" /><br/>
+
+                            <h:outputLabel class="card-text font-weight-bold" value="Costo" for="costo" />
+                            <h:inputText value="#{servicioView.ser.costo}" class="form-control" id="costo" html5:placeholder="Costo" /><br/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <h:commandButton action="#{servicioView.registrarServicio()}" class="btn btn-primary" value="Editar.">
+                            </h:commandButton>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="foto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog text-dark">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Foto servicio</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                        </button>
+                    </div>
+                    <div id="frmFoto" class="modal-body">
+                        <h:form enctype="multipart/form-data">
+
+                            <h:graphicImage
+                                height="128px"
+                                width="128px"
+                                class="rounded mx-auto d-block"
+                                id="fotoPerfil"
+                                value="/ImgServletServicio/#{servicioView.serFot.servicioFoto}">
+                            </h:graphicImage>
+
+                            <h:inputFile value="#{servicioView.archivoFoto}" class="btn btn-info" >
+                                <!--Llamado asíncronico-->
+                                <f:ajax listener="#{servicioView.cargarFotoServicio()}"></f:ajax>
+                            </h:inputFile>
+
+                            <button style="display: none" type="reset" id="resetform" class="btn btn-dark">Reset</button>
+
+                        </h:form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:composition>
+</html>
+

@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:composition>
+        <p:growl id="growl" life="3000"/>
+        <div class="container">
+            <div class="col">
+                <div class="row">
+                    <div class="card container mt-3 mb-3" id="carta">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title font-weight-bold text-white">Despacho</h5>
+                                    <hr class="bg-white"/>
+                                    <!--Objeto externo de la plantilla (huevo)-->
+                                    <div class="row">
+                                        <div class="col">
+                                            <h2>Información del despacho</h2>
+                                            <h:form id="frmFinal">
+                                                <p>
+                                                    <b>Fecha de solicitud </b> #{despachoSesion.des.fechaSolicitud}
+                                                </p>
+                                                <h:commandLink class="btn btn-success" action="#{despachoSesion.registrarDespachoProducto()}" value="Registrar compra"/>
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="card container mt-3 mb-3" style="max-width: 55rem;" id="carta">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title font-weight-bold text-white">Detalles del despacho</h5>
+                                    <h:form id="frmPrincipal">
+                                        <h:commandButton class="btn btn-outline-light m-3"
+                                                         html5:data-toggle="modal"
+                                                         html5:data-target="#detalle"
+                                                         value="+" >
+                                            <f:ajax render=":formActualizar"> </f:ajax>
+                                        </h:commandButton>
+                                        <p:dataTable id="tabla" emptyMessage="Registra un detalle de compra" value="#{despachoSesion.detalles}" 
+                                                     var="d" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                                                     >
+
+                                            <p:column headerText="Nombre">
+                                                <h:outputText value="#{d.productoIdProducto.nombreProducto}"  /> 
+                                            </p:column>
+
+                                            <p:column headerText="Costo unitario">
+                                                <h:outputText value="#{d.productoIdProducto.precio}"  /> 
+                                            </p:column>
+
+                                            <p:column headerText="Cantidad" >
+                                                <h:outputText value="#{d.cantidadSolicitada}"  /> 
+                                            </p:column>
+
+                                            <p:column headerText="Precio total" >
+                                                <h:outputText value="#{d.costoTotal}"  /> 
+                                            </p:column>
+
+                                            <p:column headerText=" " exportable="false" >
+
+                                                <h:commandButton class="btn btn-warning rounded-pill"
+                                                                 action="#{despachoSesion.eliminarDetalleTemporal(d)}"  
+                                                                 value="Eliminar" >
+                                                </h:commandButton>
+
+                                            </p:column>
+
+                                        </p:dataTable>
+                                        <br/>
+                                        <h3>Costo total del detalle de compra: #{despachoSesion.costoTotal}</h3>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal fade text-dark" id="detalle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Registro detalle de compra;</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h:form id="frmDetalle">
+                        <div class="modal-body">
+                            Producto
+                            <h:commandButton class="btn btn-dark"
+                                             html5:data-toggle="modal"
+                                             html5:data-target="#productos"
+                                             value="Agregar producto" >
+                                <f:ajax render=":formActualizar"> </f:ajax>
+                            </h:commandButton>
+                            Producto seleccionado:
+                            #{despachoSesion.producto.nombreProducto}
+                            Cantidad solicitada
+                            <h:inputText value="#{despachoSesion.detalleDespachoIn.cantidadSolicitada}" required="true" html5:placeholder="Cantidad" class="form-control"/><br/>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <h:commandButton action="#{despachoSesion.guardarDetallesTemporales()}" class="btn btn-primary" value="Editar.">
+                            </h:commandButton>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="productos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Selecciona un producto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h:form id="formActualizar">
+                        <div class="modal-body">
+                            <div class="row">                                
+                                <c:forEach items="#{despachoSesion.productos}" var="prod" varStatus="act">
+                                    <div class="col-lg-4">
+                                        <h:commandLink
+                                            html5:data-toggle="modal"
+                                            html5:data-target="#exampleModalComprar" 
+                                            html5:data-dismiss="modal"
+                                            action ="#{despachoSesion.guardarProductoTemporal(prod)}">
+                                            <div class="card text-dark">
+                                                <div class="card-header border-0">
+                                                    Nombre del producto
+                                                    <h3 class="card-title">#{prod.nombreProducto}</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    Descripcion
+                                                    <h4 class="card-title">#{prod.descripcion}</h4>
+                                                    Costo
+                                                    <h5 class="card-title">#{prod.precio}</h5>
+                                                    <!--No olvidar colocar foto aquí-->
+                                                </div>
+                                            </div>
+                                            <f:ajax render=":frmDetalle"> </f:ajax>
+                                        </h:commandLink>
+                                    </div>
+                                </c:forEach>
+                            </div>
+
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </ui:composition>
+</html>
+

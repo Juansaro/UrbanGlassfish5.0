@@ -1,0 +1,126 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #181818;
+    color: #fff;
+    line-height: 1.6;
+    font-family: 'Quicksand', sans-serif;
+    padding: 0 1.5em;
+    font-family: "Oswald", sans-serif;
+    background-color: #000000;
+    /* Pattern from https://www.heropatterns.com/ */
+    background-color: #202020;
+    background-image: url("data:image/svg+xml,%3Csvg width='80' height='88' viewBox='0 0 80 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M22 21.91V26h-2c-9.94 0-18 8.06-18 18 0 9.943 8.058 18 18 18h2v4.09c8.012.722 14.785 5.738 18 12.73 3.212-6.99 9.983-12.008 18-12.73V62h2c9.94 0 18-8.06 18-18 0-9.943-8.058-18-18-18h-2v-4.09c-8.012-.722-14.785-5.738-18-12.73-3.212 6.99-9.983 12.008-18 12.73zM54 58v4.696c-5.574 1.316-10.455 4.428-14 8.69-3.545-4.262-8.426-7.374-14-8.69V58h-5.993C12.27 58 6 51.734 6 44c0-7.732 6.275-14 14.007-14H26v-4.696c5.574-1.316 10.455-4.428 14-8.69 3.545 4.262 8.426 7.374 14 8.69V30h5.993C67.73 30 74 36.266 74 44c0 7.732-6.275 14-14.007 14H54zM42 88c0-9.94 8.06-18 18-18h2v-4.09c8.016-.722 14.787-5.738 18-12.73v7.434c-3.545 4.262-8.426 7.374-14 8.69V74h-5.993C52.275 74 46 80.268 46 88h-4zm-4 0c0-9.943-8.058-18-18-18h-2v-4.09c-8.012-.722-14.785-5.738-18-12.73v7.434c3.545 4.262 8.426 7.374 14 8.69V74h5.993C27.73 74 34 80.266 34 88h4zm4-88c0 9.943 8.058 18 18 18h2v4.09c8.012.722 14.785 5.738 18 12.73v-7.434c-3.545-4.262-8.426-7.374-14-8.69V14h-5.993C52.27 14 46 7.734 46 0h-4zM0 34.82c3.213-6.992 9.984-12.008 18-12.73V18h2c9.94 0 18-8.06 18-18h-4c0 7.732-6.275 14-14.007 14H14v4.696c-5.574 1.316-10.455 4.428-14 8.69v7.433z' fill='%23000000' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+    color: #1e272e;
+    color: #fff;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1.5em;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.logo {
+    text-align: center;
+    font-size: 3em;
+}
+
+.logo span {
+    color: #B70E21;
+}
+
+.contact-wrapper {
+    box-shadow: 0 0 20px 0 rgba(255, 255, 255, .3);
+}
+
+.contact-wrapper > * {
+    padding: 1em;
+}
+
+.contact-form {
+    background: #222222;
+}
+
+.contact-form form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.contact-form form label {
+    display: block;
+}
+
+.contact-form form p {
+    margin: 0;
+    padding: 1em;
+}
+
+.contact-form form .block {
+    grid-column: 1 / 3;
+}
+
+.contact-form form button,
+.contact-form form input,
+.contact-form form textarea {
+    width: 100%;
+    padding: .7em;
+    border: none;
+    background: none;
+    outline: 0;
+    color: #fff;
+    border-bottom: 1px solid #d63031;
+}
+
+.contact-form form button {
+    background: #B70E21;
+    border: 0;
+    text-transform: uppercase;
+    padding: 1em;
+}
+
+.contact-form form button:hover,
+.contact-form form button:focus {
+    background: #d63031;
+    color: #fff;
+    transition: background-color 1s ease-out;
+    outline: 0;
+}
+
+/* CONTACT INFO */
+.contact-info {
+    background: #000;
+}
+
+.contact-info h4, .contact-info ul, .contact-info p {
+    text-align: center;
+    margin: 0 0 1rem 0;
+}
+
+/* LARGE SIZE */
+@media(min-width: 700px) {
+    body {
+        padding: 0 4em;
+    }
+    .contact-wrapper {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+    }
+    .contact-wrapper > * {
+        padding: 2em;
+    }
+    .contact-info h4,
+    .contact-info ul,
+    .contact-info p {
+        text-align: left;
+    }
+}

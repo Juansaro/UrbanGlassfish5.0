@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition>
+        <p:growl id="growl" life="3000"/>
+        <div class="container text-dark">
+            <div class="row pt-4 text-white">
+                <div class="col">
+                    <div class="card " id="carta" style="width: 18rem;">
+                        <h:form enctype="multipart/form-data">
+
+                            <h:graphicImage
+                                height="128px"
+                                width="128px"
+                                class="rounded mx-auto d-block"
+                                id="fotoPerfil"
+                                value="/ImgServlet/#{usuarioSesion.usuLog.usuFoto}">
+                            </h:graphicImage>
+
+                            <h:inputFile value="#{usuarioSesion.archivoFoto}" class="btn btn-info" >
+                                <!--Llamado asíncronico-->
+                                <f:ajax listener="#{usuarioSesion.cargarFotoPerfil()}"></f:ajax>
+                            </h:inputFile>
+
+                            <button style="display: none" type="reset" id="resetform" class="btn btn-dark">Reset</button>
+
+                        </h:form>
+                        <div class="card-body">
+                            <h5 class="card-title">¡Bienvenido!</h5>
+                            <p class="card-text">${nombre} ${apellido}</p>
+                            <a href="#" class="btn btn-success">Consultar datos</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-3"  id="carta" style="max-width: 340px; max-height: 150px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="..." alt="..."/>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Citas agendadas</h5>
+                                    <p class="card-text">longer.</p>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-3" id="carta" style="width: 340px; max-height: 150px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="..." alt="..."/>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Facturas generadas</h5>
+                                    <p class="card-text">longer.</p>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col pt-4 col-lg-4 text-white">
+                    <div class="card" style="width: 18rem;" id="carta">
+                        <div class="card-body">
+                            <h3>Servicios:</h3>
+                            <p>Corte básico. $17.000</p>
+                            <p>Corte junior. $13.000</p>
+                            <p>Corte barba. $8.000</p>
+                            <a href="#" class="btn btn-success">Consultar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-" style="width: 40rem;">
+                    <div class="accordion" style="width: 47rem;" id="accordionExample">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Uso del sitio:
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    Some placeholder content for the first accordion panel. This panel is shown by default, thanks to the <code>.show</code> class.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Información para administrar usuarios.
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    Some placeholder content for the second accordion panel. This panel is hidden by default.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        Información sobre el comportamiento de la aplicación web.
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    And lastly, the placeholder content for the third and final accordion panel. This panel is hidden by default.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:composition>
+</html>
+

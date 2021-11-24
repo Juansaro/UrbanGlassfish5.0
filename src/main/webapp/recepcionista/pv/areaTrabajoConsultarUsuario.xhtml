@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:composition>
+        <h4 class="text-dark">Carga usuarios</h4>
+        <h:form id="forarchivo" enctype="multipart/form-data">
+            <h:inputFile value="#{usuarioSesion.archivoCarga}" id="carga" class="btn btn-info" >
+                <!--Llamado asíncronico-->
+                <f:ajax render=":frmPrincipal" listener="#{usuarioSesion.cargarInicialDatos()}" ></f:ajax>
+            </h:inputFile>
+            <button style="display: none" type="reset" id="resetform" class="btn btn-dark">Reset</button>
+        </h:form>
+        <h4 class="text-dark">Carga ciudades</h4>
+        <hr/>
+        <h:form id="ciudad" enctype="multipart/form-data">
+            <h:inputFile value="#{ciudadSesion.archivoCarga}" id="carga" class="btn btn-info" >
+                <!--Llamado asíncronico-->
+                <f:ajax listener="#{ciudadSesion.cargarInicialDatos()}" ></f:ajax>
+            </h:inputFile>
+            <button style="display: none" type="reset" id="resetform" class="btn btn-dark">Reset</button>
+        </h:form>
+        <h4 class="text-dark">Carga servicios</h4>
+        <hr/>
+        <h:form id="servicio" enctype="multipart/form-data">
+            <h:inputFile value="#{servicioSesion.archivoCarga}" id="carga" class="btn btn-info" >
+                <!--Llamado asíncronico-->
+                <f:ajax listener="#{servicioSesion.cargarInicialDatos()}" ></f:ajax>
+            </h:inputFile>
+            <button style="display: none" type="reset" id="resetform" class="btn btn-dark">Reset</button>
+        </h:form>
+        
+        <hr/>
+
+        <div class="card container mt-3 mb-3" style="max-width: 95rem;" id="carta">
+            <div class="row">
+                <div class="col">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold text-white">Consultar usuarios</h5>
+                        <hr class="bg-white"/>
+
+                        <a onclick="${'#forarchivo:carga'}.click()" class="btn btn-tool btn-sm">Carga de archivo</a>
+
+                        <h:form id="frmPrincipal" styleClass="jsfcrud_list_form">
+                            <p:growl id="growl" life="3000"/>
+                            <p:dataTable id="tabla" emptyMessage="Ninguna usuario registrado" value="#{usuarioSesion.usuarios}" 
+                                         var="u" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                                         >
+                                <p:column headerText="Nombre" filterBy="#{u.nombre}" filterMatchMode="contains" >
+                                    <h:outputText value="#{u.nombre}"  /> 
+                                </p:column>
+
+                                <p:column headerText="Apellidos" filterBy="#{u.apellido}" filterMatchMode="contains" >
+                                    <h:outputText value="#{u.apellido}"  /> 
+                                </p:column>
+
+                                <p:column headerText="Clave:" filterBy="#{u.contrasena}" filterMatchMode="contains" >
+                                    <h:outputText value="#{u.contrasena}"  /> 
+                                </p:column>
+
+                                <p:column headerText="Email:" filterBy="#{u.correo}" filterMatchMode="contains" >
+                                    <h:outputText value="#{u.correo}"  /> 
+                                </p:column>
+
+                                <p:column headerText="Documento" filterBy="#{u.numeroDocumento}" filterMatchMode="contains" >
+                                    <h:outputText value="#{u.numeroDocumento}"  /> 
+                                </p:column>
+
+                                <p:column headerText="Numero de telefono:" filterBy="#{u.numeroTelefono}" filterMatchMode="contains" >
+                                    <h:outputText value="#{u.numeroTelefono}"  /> 
+                                </p:column>
+                                
+                                <p:column headerText="Rol" filterBy="#{u.tipoRolNumeroRol}" filterMatchMode="contains" >
+                                    <h:outputText value="#{u.tipoRolNumeroRol.descripcion}"  /> 
+                                </p:column>
+                                
+                                <p:column headerText="Ciudad" filterBy="#{u.ciudadNumeroCiudad}" filterMatchMode="contains" >
+                                    <h:outputText value="#{u.ciudadNumeroCiudad}"  /> 
+                                </p:column>
+
+                                <p:column headerText="Tipo identificacion" filterBy="#{u.tipoIdentificacionIdTipoIdentificacion}" filterMatchMode="contains" >
+                                    <h:outputText value="#{u.tipoIdentificacionIdTipoIdentificacion}"  /> 
+                                </p:column>
+
+
+                                <p:column headerText=" " exportable="false" >
+
+                                    <h:commandButton class="btn btn-warning rounded-pill"
+                                                     html5:data-toggle="modal"
+                                                     html5:data-target="#exampleModalAct"
+                                                     action="#{usuarioSesion.guardarTemporal(u)}" 
+                                                     value="Editar" >
+                                        <f:ajax render=":formActualizar"> </f:ajax>
+                                    </h:commandButton>
+
+                                </p:column>
+
+                                <p:column headerText=" " exportable="false" >
+
+                                    <h:commandLink class="btn btn-danger rounded-pill" action="#{usuarioSesion.eliminarUsuario(u)}" value="Eliminar"/>
+
+                                </p:column>  
+                                
+                            </p:dataTable>
+
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModalAct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Actualizar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h:form id="formActualizar">
+                        <div class="modal-body">
+
+                            <h:outputLabel value="Nombre:" for="nombre" />
+                            <h:inputText id="nombre" value="#{usuarioSesion.usuTemporal.nombre}" required="true" html5:placeholder="Nombre" class="form-control"/>
+
+                            <h:outputLabel value="Apellido:" for="apellido" />
+                            <h:inputText id="apellido" value="#{usuarioSesion.usuTemporal.apellido}" required="true" html5:placeholder="Apellido" class="form-control"/>
+
+                            <h:outputLabel value="Correo:" for="correo" />
+                            <h:inputText id="correo" value="#{usuarioSesion.usuTemporal.correo}" required="true" html5:placeholder="Correo" class="form-control"/>
+
+                            <h:outputLabel value="Contrasena:" for="contrasena" />
+                            <h:inputText id="contrasena" value="#{usuarioSesion.usuTemporal.contrasena}" required="true" html5:placeholder="contraseña" class="form-control"/>
+
+                            <h:outputLabel value="Tipo identificacion:" for="tipoIdentificacionIdTipoIdentificacion" />
+                            <h:selectOneMenu class="form-control" id="tipoIdentificacionIdTipoIdentificacion" value="#{usuarioSesion.ciudad.numeroCiudad}" required="true" >
+                                <f:selectItems value="#{usuarioSesion.ciudades}" var="ciu" itemLabel="#{ciu.nombreCiudad}" itemValue="#{ciu.numeroCiudad}"/>
+                            </h:selectOneMenu>
+
+                            <h:outputLabel value="Tipo rol:" for="ripoRol" />
+                            <h:selectOneMenu class="form-control" id="ripoRol" value="#{usuarioSesion.tipoRol.numeroRol}" required="true">
+                                <f:selectItems value="#{usuarioSesion.roles}" var="rol" itemLabel="#{rol.descripcion}" itemValue="#{rol.numeroRol}"/>
+                            </h:selectOneMenu>
+
+                            <h:outputLabel value="Tipo identificacion:" for="tipoIdentificacion" />
+                            <h:selectOneMenu class="form-control" id="tipoIdentificacion" value="#{usuarioSesion.tipoIdentificacion.idTipoIdentificacion}" required="true">
+                                <f:selectItems value="#{usuarioSesion.tipoIdentificaciones}" var="ide" itemLabel="#{ide.descripcion}" itemValue="#{ide.idTipoIdentificacion}"/>
+                            </h:selectOneMenu>
+
+                            <h:outputLabel value="Tipo telefono:" for="tipoTelefono" />
+                            <h:selectOneMenu class="form-control" id="tipoTelefono" value="#{usuarioSesion.tipoTelefono.numeroTipoTelefono}" required="true">
+                                <f:selectItems value="#{usuarioSesion.tipoTelefonos}" var="tel" itemLabel="#{tel.descripcion}" itemValue="#{tel.numeroTipoTelefono}"/>
+                            </h:selectOneMenu>
+
+                            <h:outputLabel value="Numero de documento:" for="numeroDocumento" />
+                            <h:inputText id="numeroDocumento" value="#{usuarioSesion.usuTemporal.numeroDocumento}" required="true" html5:placeholder="Número documento" class="form-control"/>
+
+                            <h:outputLabel value="Numero de telefono:" for="numeroTelefono" />
+                            <h:inputText id="numeroTelefono" value="#{usuarioSesion.usuTemporal.numeroTelefono}" required="true" html5:placeholder="Número telefono" class="form-control"/>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <h:commandButton action="#{usuarioSesion.editarUsuario()}" class="btn btn-primary" value="Registrar.">
+                            </h:commandButton>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+    </ui:composition>
+</html>
+

@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition>
+        <div class="bg-dark" id="sidebar-wrapper">
+            <div class="sidebar-heading text-white font-weight-bold mb-3 pt-4">Cliente</div>
+            <div class="list-group list-group-flush">
+                <!--Los elementos padre e hijos deben estar dentro de un super ul y los elementos padre primero se abren con in <i> y luego un sub- <ul>-->
+                <ul class="list-unstyled components"> <!--Elemento <u> padre--> <!--La clase de <ul> "list-unstyled components" le quita los elementos por defecto de <a>-->
+                    <li class="active">
+                        <li>
+                            <h:link outcome="index">
+                                <b class="list-group-item list-group-item-action text-white bg-dark" id="opciones"><ion-icon class="pr-2" name="home"></ion-icon>Inicio</b>
+                            </h:link>
+                        </li>
+                        <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle list-group-item list-group-item-action text-white bg-dark" id="opciones"><ion-icon class="pr-2" name="calendar"></ion-icon>Citas</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu1">
+                            <li>
+                                <h:link outcome="agendarCita">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5" id="opciones">Agendar cita</b>
+                                </h:link>
+                            </li>
+                            <li>
+                                <h:link outcome="consultarCita">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5" id="opciones">Citas en espera</b>
+                                </h:link>
+                            </li>
+                            <li>
+                                <h:link outcome="consultarCitasAgendadas">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5" id="opciones">Citas agendadas</b>
+                                </h:link>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--Elemento-->
+
+                    <li>
+                        <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle list-group-item list-group-item-action text-white bg-dark" id="opciones"><ion-icon class="pr-2" name="create"></ion-icon>Fidelización</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu2">
+                            <li>
+                                <h:link outcome="registrarCalificacion">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5" id="opciones">Registrar calificación</b>
+                                </h:link>
+                            </li>
+                            <li>
+                                <h:link outcome="consultarCalificacion">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5" id="opciones">Consultar calificación</b>
+                                </h:link>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--Elemento-->
+
+                    <li>
+                        <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle list-group-item list-group-item-action text-white bg-dark" id="opciones"><ion-icon class="pr-2" name="create"></ion-icon>Servicios</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu3">
+                            <li>
+                                <h:link outcome="consultarServicio">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5" id="opciones">Consultar servicios</b>
+                                </h:link>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--Elemento-->
+                    <li>
+                        <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle list-group-item list-group-item-action text-white bg-dark" id="opciones"><ion-icon class="pr-2" name="receipt"></ion-icon>Facturas</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu4">
+                            <li>
+                                <h:link outcome="consultarFactura">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5" id="opciones">Consultar facturas</b>
+                                </h:link>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--Elemento-->
+                    <li>
+                        <li>
+                            <h:link outcome="modificarDatosCliente">
+                                <b class="list-group-item list-group-item-action text-white bg-dark" id="opciones"><ion-icon class="pr-2" name="home"></ion-icon>Modificar datos usuario</b>
+                            </h:link>
+                        </li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </ui:composition>
+</html>
+

@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+        <h:form id="frmPrincipal">
+            <h:outputLabel class="card-text font-weight-bold text-white m-3">Descarga el reporte de las bodegas:</h:outputLabel>
+            <h:commandLink class="btn btn-danger rounded-pill m-3">
+                Pdf
+                <p:dataExporter type="pdf" target="tabla" fileName="categoriaspdf"/>
+                
+            </h:commandLink>
+            <h:commandLink class="btn btn-light rounded-pill m-3">
+                Excel
+                <p:dataExporter type="xls" target="tabla" fileName="bodegaexcel"/>
+                
+            </h:commandLink>
+            <p:dataTable id="tabla" emptyMessage="Ninguna bodega registrada" value="#{bodegaSesion.bodegas}" 
+                         var="bod" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom">
+                
+                <p:column headerText="Bodega" filterBy="#{bod.nombre}" filterMatchMode="contains" >
+                   <h:outputText value="#{bod.nombre}"  /> 
+                </p:column>
+                    
+                  
+                <p:column headerText="Existencias" filterBy="#{bod.existencias}" filterMatchMode="contains" >
+                    <h:outputText value="#{bod.existencias}"  /> 
+                </p:column>
+                
+            </p:dataTable>
+                
+        </h:form>
+
+    </ui:composition>
+</html>
+

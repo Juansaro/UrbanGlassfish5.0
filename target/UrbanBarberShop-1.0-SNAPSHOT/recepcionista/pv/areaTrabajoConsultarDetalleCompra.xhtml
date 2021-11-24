@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+        <div class="card container mt-3 mb-3" style="max-width: 21rem;" id="carta">
+            <div class="row">
+                <div class="col">
+                    <img src="img/Bodega.png" class="card-img mt-3"  alt="Foto de bodega de barbería"/>
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold text-white">Registrar factura:</h5>
+                        <hr class="bg-white"/>
+                        <h:form>
+                            <h:outputLabel value="Fecha de solicitud:" for="fechaSolicitud" />
+                            <br/>
+                            <p:calendar id="fechaSolicitud" value="#{compraSesion.com.fechaSolicitud}" pattern="MM/dd/yyyy HH:mm:ss"/>
+                            <br/>
+                            <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+                                <h:outputText value="Datetime:"/>
+                                <h:outputText value="#{calendarView.date10}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss"/>
+                                </h:outputText>
+                            </p:dialog>
+
+                            <h:outputLabel class="card-text font-weight-bold text-white" value="Proveedor:" for="servicioIdServicio" />
+                            <br/>
+                            <h:selectOneMenu class="form-control" id="barbero" value="#{compraSesion.proveedor.numeroProveedor}" required="true">
+                                <f:selectItems value="#{compraSesion.proveedores}" var="pro" itemLabel="#{pro.correo}" itemValue="#{pro.numeroProveedor}"/>
+                            </h:selectOneMenu>
+
+                            <h:commandButton action="#{compraSesion.registrarCompra()}" class="btn btn-primary" value="Registrar.">
+                            </h:commandButton>
+                            
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:composition>
+</html>
+

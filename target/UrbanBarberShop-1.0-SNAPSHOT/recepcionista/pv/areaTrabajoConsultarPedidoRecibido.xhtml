@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+        <p:growl id="growl" life="3000"/>
+        <div class="card container mt-3 mb-3" style="max-width: 55rem;" id="carta">
+            <div class="row">
+                <div class="col">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold text-white">Lista de pedidos</h5>
+                        <br/>
+                        <h:form id="frmPrincipal">
+                            <p:dataTable id="tabla" emptyMessage="Ningun pedido confirmado registrado" value="#{pedidoSesion.pedidos}" 
+                                         var="pe" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                                         >
+
+                                <p:column headerText="Numero pedido" filterBy="#{pe.numeroPedido}" filterMatchMode="contains" >
+                                    <h:outputText value="#{pe.numeroPedido}"  /> 
+                                </p:column>
+
+                                <p:column headerText="Cantidad solicitada" filterBy="#{pe.fechaRecibida}" filterMatchMode="contains" >
+                                    <h:outputText value="#{pe.fechaRecibida}"  /> 
+                                </p:column>
+
+                                <p:column headerText="Numero de detalle" filterBy="#{pe.detallePedidoNumeroDetalle}" filterMatchMode="contains" >
+                                    <h:outputText value="#{pe.detallePedidoNumeroDetalle}"  /> 
+                                </p:column>
+
+                                <p:column headerText="Email del recepcionista" filterBy="#{pe.usuarioIdUsuario}" filterMatchMode="contains" >
+                                    <h:outputText value="#{pe.usuarioIdUsuario}"  /> 
+                                </p:column>
+
+                                <p:column headerText=" " exportable="false" >
+
+                                    <h:commandLink class="btn btn-primary rounded-pill" action="#{pedidoSesion.eliminarPedido(pe)}" value="Eliminar"/>
+
+                                </p:column>  
+
+                            </p:dataTable>
+                        </h:form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:composition>
+</html>
+

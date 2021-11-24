@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aac47ce2-8676-4d37-9c12-fef8e45e53fb">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="52"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="facturaIn" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT cliente.nombre as "nombre cliente", cliente.apellido "apellido cliente", cliente.correo, barbero.nombre as "nombre barbero", barbero.apellido as "apellido barbero", group_concat(servicio.nombre) as servicios, factura.costo
+FROM factura factura
+INNER JOIN cita cita on cita.id_cita = factura.cita_id_cita
+INNER JOIN usuario cliente on cliente.id_usuario = cita.id_cliente
+INNER JOIN usuario barbero on barbero.id_usuario = cita.id_barbero
+INNER JOIN cita_has_servicio coleccion on coleccion.cita_id_cita = cita.id_cita
+INNER JOIN servicio servicio on servicio.id_servicio = coleccion.servicio_id_servicio
+WHERE factura.id_factura = $P{facturaIn};]]>
+	</queryString>
+	<field name="nombre cliente" class="java.lang.String"/>
+	<field name="apellido cliente" class="java.lang.String"/>
+	<field name="correo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre barbero" class="java.lang.String"/>
+	<field name="apellido barbero" class="java.lang.String"/>
+	<field name="servicios" class="java.lang.String"/>
+	<field name="costo" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="69" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="359" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="128" y="0" width="555" height="18" uuid="250d64bf-f97d-4d7d-bb74-2af6607b8bd5"/>
+			</frame>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="130" y="72" width="189" height="18" uuid="67f40ba8-112d-4371-9283-b84fd555c9b6"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apellido cliente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="128" y="0" width="120" height="18" forecolor="#000000" uuid="3fe30187-d6a7-4c18-b3b0-5aa0382f9d09"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre cliente]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="128" y="18" width="191" height="18" uuid="18fa78e8-184f-415d-9e82-54d1ee85d70b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre cliente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="128" y="54" width="120" height="18" forecolor="#000000" uuid="326ffd54-7c48-482b-b7a6-972e2219f30d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellido cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="130" y="100" width="79" height="18" forecolor="#000000" uuid="07b094bc-2637-45e0-8b07-1b9e6af163c7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Correo]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="128" y="118" width="191" height="18" uuid="2894a652-35fa-45d0-8c33-c238179d5425"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{correo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="128" y="173" width="191" height="18" uuid="7ceaaa37-fb1e-43b1-8e49-309df23b7fcd"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre barbero}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="128" y="155" width="118" height="18" forecolor="#000000" uuid="6b025ca5-857a-43ca-81be-3d497136023f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre barbero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="128" y="199" width="118" height="18" forecolor="#000000" uuid="44b77f55-a79e-472e-9669-cb7a1658e453"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[apellido barbero]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="128" y="217" width="191" height="18" uuid="91a6dc2d-2d21-4ad9-8a2d-2272c91a74f9"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apellido barbero}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="126" y="246" width="79" height="18" forecolor="#000000" uuid="0daaa2a9-3f8b-41dd-89b9-11495865f597"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Servicios]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="128" y="264" width="191" height="41" uuid="6e1acd72-4934-462a-a742-027c87f5937b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{servicios}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="130" y="305" width="79" height="18" forecolor="#000000" uuid="9d767b56-f755-4217-aaec-212ab60822b2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Costo]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="130" y="323" width="79" height="18" uuid="4031055a-6bbd-4467-86fa-ace22ae9dab4"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{costo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="64" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="cc583beb-9e33-4774-b456-8fa902201a95"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="81" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

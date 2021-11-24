@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <div class="card container mt-3 mb-3" style="max-width: 55rem;" id="carta">
+                <div class="row">
+                    <div class="col">
+                        <div class="card-body">
+                            <h5 class="card-title font-weight-bold text-white">Lista de proveedores:</h5>
+                            <br/>
+                            <p:growl id="growl" life="3000"/>
+                            <h:form id="frmPrincipal">
+                                <p:growl id="growl" life="3000"/>
+                                <p:dataTable id="tabla" emptyMessage="Ningun proveedor registrado" value="#{proveedorSesion.proveedores}" 
+                                             var="p" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                                             >
+
+                                    <p:column headerText="Nombre" filterBy="#{p.nombre}" filterMatchMode="Nombre" >
+                                        <h:outputText value="#{p.nombre}"  /> 
+                                    </p:column>
+
+                                    <p:column headerText="Apellidos" filterBy="#{p.apellidos}" filterMatchMode="Descripción" >
+                                        <h:outputText value="#{p.apellidos}"  /> 
+                                    </p:column>
+
+                                    <p:column headerText="Correo" filterBy="#{p.correo}" filterMatchMode="Costo" >
+                                        <h:outputText value="#{p.correo}"  /> 
+                                    </p:column>
+
+                                    <p:column headerText="Direccion" filterBy="#{p.direccion}" filterMatchMode="Costo" >
+                                        <h:outputText value="#{p.direccion}"  /> 
+                                    </p:column>
+
+                                    <p:column headerText=" " exportable="false" >
+
+                                        <h:commandButton class="btn btn-warning rounded-pill"
+                                                         html5:data-toggle="modal"
+                                                         html5:data-target="#exampleModalAct"
+                                                         action="#{proveedorSesion.guardarTemporal(p)}" 
+                                                         value="Editar" >
+                                            <f:ajax render=":formActualizar"> </f:ajax>
+                                        </h:commandButton>
+
+                                    </p:column>
+
+                                    <p:column headerText=" " exportable="false" >
+
+                                        <h:commandLink class="btn btn-danger rounded-pill" action="#{proveedorSesion.eliminarProveedor(p)}" value="Eliminar"/>
+
+                                    </p:column>  
+
+                                </p:dataTable>
+
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModalAct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Actualizar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <h:form id="formActualizar">
+                            <div class="modal-body">
+                                <h:outputLabel class="card-text font-weight-bold text-white" value="Nombre" for="nombre" />
+                                <h:inputText class="form-control" id="nombre" value="#{proveedorSesion.proTemporal.nombre}" html5:placeholder="Nombre del proveedor" />
+                                <h:outputLabel class="card-text font-weight-bold text-white" value="Apellidos:" for="apellidos" />
+                                <h:inputText class="form-control" id="apellidos" value="#{proveedorSesion.proTemporal.apellidos}" html5:placeholder="Apellidos del proveedor" />
+                                <h:outputLabel class="card-text font-weight-bold text-white" value="Correo:" for="correo" />
+                                <h:inputText class="form-control" id="correo" value="#{proveedorSesion.proTemporal.correo}" html5:placeholder="Correo del proveedor" />
+                                <h:outputLabel class="card-text font-weight-bold text-white" value="Dirección:" for="direccion" />
+                                <h:inputText class="form-control" id="direccion" value="#{proveedorSesion.proTemporal.direccion}" html5:placeholder="Dirección del proveedor" />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <h:commandLink class="btn btn-primary" action="#{proveedorSesion.editarProveedor()}" value="Guardar" />
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:composition>
+        <p:growl id="growl" life="3000"/>
+        <div class="card container mt-3 mb-3" style="max-width: 55rem;" id="carta">
+            <div class="row">
+                <div class="col">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold text-white">Asignar agenda</h5>
+                        <hr class="bg-white"/>
+                        <h:form id="frmPrincipal">
+                            <p:growl id="growl" life="3000"/>
+                            <p:dataTable id="tabla" emptyMessage="Ningun pedido confirmado registrado" value="#{citaSesion.citas}" 
+                                         var="item" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                                         >
+
+                                <p:column headerText="Numero de cita" >
+                                    <h:outputText value="#{item.idCita}"  /> 
+                                </p:column>
+
+                                <p:column headerText="Fecha de la cita" filterBy="#{item.fechaCita}" filterMatchMode="contains" >
+                                    <h:outputText value="#{item.fechaCita}"  /> 
+                                </p:column>
+
+                                <p:column headerText="Estado de asignacion" filterBy="#{item.estadoAsignacionIdEstadoAsignacion}" filterMatchMode="contains" >
+                                    <h:outputText value="#{item.estadoAsignacionIdEstadoAsignacion}"  /> 
+                                </p:column>
+
+                                <p:column headerText="Cliente" filterBy="#{item.idCliente}" filterMatchMode="contains" >
+                                    <h:outputText value="#{item.idCliente}"  /> 
+                                </p:column>
+                                
+                                <p:column headerText="Barbero" filterBy="#{item.idBarbero}" filterMatchMode="contains" >
+                                    <h:outputText value="#{item.idBarbero}"  /> 
+                                </p:column>
+
+                                <p:column headerText=" " exportable="false" >
+
+                                    <h:commandButton class="btn btn-warning rounded-pill"
+                                                     html5:data-toggle="modal"
+                                                     html5:data-target="#exampleModalAct"
+                                                     action="#{citaSesion.guardarTemporal(item)}" 
+                                                     value="Editar" >
+                                        <f:ajax render=":formActualizar"> </f:ajax>
+                                    </h:commandButton>
+
+                                </p:column>
+
+                                <p:column headerText=" " exportable="false" >
+
+                                    <h:commandLink class="btn btn-primary rounded-pill" action="#{citaSesion.avisarEmailCliente(item)}" value="Avisar email"/>
+
+                                </p:column>  
+
+                            </p:dataTable>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="exampleModalAct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Actualizar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h:form id="formActualizar">
+                        <div class="modal-body">
+
+                            <h:outputLabel class="card-text font-weight-bold text-white" value="Estado de asignación:" for="servicioIdServicio" />
+                            <br/>
+                            <h:selectOneMenu class="form-control" id="estado" value="#{citaSesion.estadoAsignacion.idEstadoAsignacion}" required="true">
+                                <f:selectItems value="#{citaSesion.estadoAsignaciones}" var="es" itemLabel="#{es.descripcion}" itemValue="#{es.idEstadoAsignacion}"/>
+                            </h:selectOneMenu>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <h:commandButton action="#{citaSesion.editarCita()}" class="btn btn-primary" value="Editar">
+                            </h:commandButton>
+
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        
+    </ui:composition>
+</html>
+

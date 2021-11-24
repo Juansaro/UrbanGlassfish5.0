@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition>
+        <div class="bg-dark" id="sidebar-wrapper">
+            <div class="sidebar-heading text-white font-weight-bold mb-3 pt-4 lang" key="recepcionista">Recepcionista</div>
+            <div class="list-group list-group-flush">
+                <!--Los elementos padre e hijos deben estar dentro de un super ul y los elementos padre primero se abren con in <i> y luego un sub- <ul>-->
+                <ul class="list-unstyled components"> <!--Elemento <u> padre--> <!--La clase de <ul> "list-unstyled components" le quita los elementos por defecto de <a>-->
+                    <li class="active">
+                        <li>
+                            <h:link outcome="index">
+                                <b class="list-group-item list-group-item-action text-white bg-dark" id="opciones"><ion-icon class="pr-2 lang" key="inicio" name="home">Inicio</ion-icon></b>
+                            </h:link> 
+                        </li>
+                        <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle list-group-item list-group-item-action text-white bg-dark" id="opciones"><ion-icon class="pr-2 lang" name="file-tray-stacked" key="bodegas">Facturación de citas</ion-icon></a>
+                        <!--Primero un <a> del título del elemento padre y luego el <ul> con los elementos hijos-->
+                        <!--Se debe enlazar el href del padre con el <ul> (ID)-->
+                        <ul class="collapse list-unstyled" id="pageSubmenu1">
+                            <li>
+                                <h:link outcome="registrarFactura">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5 lang" id="opciones" key="registrarFactura">Registrar factura</b>
+                                </h:link>
+                            </li>
+                            <li>
+                                <h:link outcome="consultarFactura">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5 lang" id="opciones" key="consultarFacturas">Facturas</b>
+                                </h:link>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--Elemento-->
+                    <li>
+                        <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle list-group-item list-group-item-action text-white bg-dark" id="opciones"><ion-icon class="pr-2 lang" name="file-tray" key="productos">Inventario</ion-icon></a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu2">
+                            <li>
+                                <h:link outcome="consultarBodega">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5 lang" id="opciones" key="consultarBodegas">Bodegas</b>
+                                </h:link>
+                            </li>
+                            <li>
+                                <h:link outcome="consultarProducto">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5 lang" id="opciones" key="actualizarProducto">Productos</b>
+                                </h:link>
+                            </li>
+                            <li>
+                                <h:link outcome="consultarProveedor">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5 lang" id="opciones" key="consultarProveedores">Proveedores</b>
+                                </h:link>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle list-group-item list-group-item-action text-white bg-dark" id="opciones"><ion-icon class="pr-2 lang" name="create" key="servicios">Servicios</ion-icon></a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu3">
+                            <li>
+                                <h:link outcome="consultarServicio">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5 lang" id="opciones" key="consultarServicio">Servicios</b>
+                                </h:link>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle list-group-item list-group-item-action text-white bg-dark" id="opciones"><ion-icon class="pr-2 lang" name="bag-check" key="pedidos">Compras y despachos</ion-icon></a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu4">
+                            <li>
+                                <h:link outcome="registrarDetalleCompra">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5 lang" id="opciones" key="registrarOrdenCompra">Registrar orden de compra</b>
+                                </h:link>
+                            </li>
+                            <li>
+                                <h:link outcome="consultarOrdenCompra">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5 lang" id="opciones" key="consultarPedido">Consultar ordenes</b>
+                                </h:link>
+                            </li>
+                            <li>
+                                <h:link outcome="registrarDespacho">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5 lang" id="opciones" key="desapacharProducto">Despachar producto</b>
+                                </h:link>
+                            </li>
+                            <li>
+                                <h:link outcome="consultarDespacho">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5 lang" id="opciones" key="consultarDespachos">Consultar despachos</b>
+                                </h:link>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--Elemento-->
+                    <li>
+                        <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle list-group-item list-group-item-action text-white bg-dark" id="opciones"><ion-icon class="pr-2 lang" name="checkmark-circle" key="fidelizacion">Fidelización</ion-icon></a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu5">
+                            <li>
+                                <h:link outcome="consultarCalificacion">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5 lang" id="opciones" key="consultarCalificaciones">Calificaciones</b>
+                                </h:link>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--Elemento-->
+                    <li>
+                        <a href="#pageSubmenu6"  data-toggle="collapse" aria-expanded="false" class="dropdown-toggle list-group-item list-group-item-action text-white bg-dark" id="opciones"><ion-icon class="pr-2 lang" name="person" key="usuario" >Usuario</ion-icon></a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu6">
+                            <li>
+                                <h:link outcome="consultarUsuario">
+                                    <b class="list-group-item list-group-item-action text-white bg-dark pl-5 lang" id="opciones" key="consultarDatos">Consultar datos</b>
+                                </h:link>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </ui:composition>
+</html>
+

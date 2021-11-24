@@ -1,0 +1,62 @@
+body {
+    margin: 0px;
+    font-family: "Muli", sans-serif;
+    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+}
+
+h1 {
+    margin: 0px;
+}
+
+.error-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 100px);
+    width: 100;
+}
+
+.error-message_container {
+    text-align: center;
+    color: white;
+}
+
+h1 {
+    font-size: 60px;
+}
+P {
+    font-size: 18px;
+}
+
+.animated {
+    animation-duration: 2.5s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+}
+
+@keyframes bounce {
+    
+}
+
+.bounce {
+    animation-name: bounce;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    min-height: 100px;
+    width: 100%;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+@media only screen and (max-width: 600px) {
+    .footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

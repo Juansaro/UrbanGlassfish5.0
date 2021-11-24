@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition>
+
+        <p:growl id="growl" life="3000"/>
+        <div class="card container mt-3 mb-3"  id="carta">
+            <div class="row">
+                <div class="col">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold text-white">Consultar Fidelización</h5>
+                        <br/>
+                        <h:form id="frmPrincipal">
+                            <p:dataTable id="tabla" emptyMessage="Ninguna calificación registrada" value="#{calificacionSesion.leerCalificacionCliente()}" 
+                                         var="c" paginator="true"  rows="15" rowSelectMode="add" paginatorPosition="bottom"
+                                         >
+                                
+                                <p:column headerText="Fecha" filterBy="#{c.citaTerminada.fechaCita}" filterMatchMode="contains" >
+                                    <h:outputText value="#{c.citaTerminada.fechaCita}"  >
+                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss"/>
+                                    </h:outputText>
+                                </p:column>
+                                
+                                <p:column headerText="Puntaje" >
+                                    <p:rating readonly="true" value="#{c.puntaje}"/>
+                                </p:column>
+                                
+                                <p:column headerText="Servicios"> 
+                                    <ui:repeat value="#{c.citaTerminada.servicioCollection}" var="servicios">
+                                        <h:outputText value="#{servicios.toString()}" /><br/>
+                                    </ui:repeat>
+                                </p:column>
+                                
+                                <p:column headerText="Barbero" filterBy="#{c.citaTerminada.idBarbero.nombre} #{c.citaTerminada.idBarbero.apellido}" filterMatchMode="contains"  >
+                                    <h:outputText value="#{c.citaTerminada.idBarbero.nombre} #{c.citaTerminada.idBarbero.apellido}"/>
+                                </p:column>
+
+                                <p:column headerText="Comentario" >
+                                    <h:outputText value="#{c.comentario}"  /> 
+                                </p:column>
+
+                                <p:column headerText=" " exportable="false" >
+
+                                    <h:commandButton class="btn btn-warning rounded-pill"
+                                                     html5:data-toggle="modal"
+                                                     html5:data-target="#exampleModalAct" 
+                                                     action="#{calificacionSesion.guardarTemporal(c)}" 
+                                                     value="Editar" >
+                                        <f:ajax render=":formActualizar"> </f:ajax>
+                                    </h:commandButton>
+
+                                </p:column>
+
+                            </p:dataTable> 
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModalAct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog text-dark">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Actualizar calificación</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h:form id="formActualizar">
+                        <div class="modal-body">
+                            <h:outputLabel class="card-text font-weight-bold" value="Puntaje" for="puntaje" />
+                            <br/>
+                            <p:rating id="puntaje" value="#{calificacionSesion.calTemporal.puntaje}"/>
+                            <br/>
+                            <h:outputLabel class="card-text font-weight-bold" value="Comentario" for="comentario" />
+                            <br/>
+                            <h:inputText class="form-control" id="comentario" value="#{calificacionSesion.calTemporal.comentario}" html5:placeholder="Escribe un comentario" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <h:commandButton action="#{calificacionSesion.editarCalificacion()}" class="btn btn-primary" value="Editar">
+                            </h:commandButton>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        
+    </ui:composition>
+</html>
+

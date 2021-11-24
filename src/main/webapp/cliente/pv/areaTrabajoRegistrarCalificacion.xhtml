@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition>
+
+        <p:growl id="growl" life="3000"/>
+        <div class="card container mt-3 mb-3" style="max-width: 55rem;" id="carta">
+            <div class="row">
+                <div class="col">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold text-white">Consultar Fidelización</h5>
+                        <br/>
+                        <h:form id="frmPrincipal">
+                            <p:dataTable id="tabla" emptyMessage="Ninguna calificación registrada" value="#{citaSesion.leerCitasFidelizacion()}" 
+                                         var="c" paginator="true"  rows="15" rowSelectMode="add" paginatorPosition="bottom"
+                                         >
+
+                                <p:column headerText="Numero de cita" >
+                                    <h:outputText value="#{c.idCita}"  /> 
+                                </p:column>
+
+                                <p:column headerText="Fecha de la cita" filterBy="#{c.fechaCita}" filterMatchMode="contains" >
+                                    <h:outputText value="#{c.fechaCita}"  >
+                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss"/>
+                                    </h:outputText>
+                                </p:column>
+
+                                <p:column headerText="Estado de asignacion" filterBy="#{c.estadoAsignacionIdEstadoAsignacion}" filterMatchMode="contains" >
+                                    <h:outputText value="#{c.estadoAsignacionIdEstadoAsignacion}"  /> 
+                                </p:column>
+
+                                <p:column headerText="Cliente" filterBy="#{c.idCliente}" filterMatchMode="contains" >
+                                    <h:outputText value="#{c.idCliente}"  /> 
+                                </p:column>
+
+                                <p:column headerText="numero barbero" filterBy="#{c.idBarbero}" filterMatchMode="contains" >
+                                    <h:outputText value="#{c.idBarbero}"  /> 
+                                </p:column>                                
+
+                                <p:column headerText=" " exportable="false" >
+
+                                    <h:commandButton class="btn btn-success rounded-pill"
+                                                     html5:data-toggle="modal"
+                                                     html5:data-target="#exampleModalAct"
+                                                     action="#{calificacionSesion.guardarCitaTemporal(c)}" 
+                                                     value="Calificacion" >
+                                        <f:ajax render=":formActualizar"> </f:ajax>
+                                    </h:commandButton>
+
+                                </p:column>
+
+                            </p:dataTable> 
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModalAct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog text-dark">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Registrar calificación</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h:form id="formActualizar">
+                        <div class="modal-body">
+                            <h:outputLabel class="card-text font-weight-bold" value="Puntaje" for="puntaje" />
+                            <br/>
+                            <p:rating id="puntaje" value="#{calificacionSesion.cal.puntaje}"/>
+                            <br/>
+                            <h:outputLabel class="card-text font-weight-bold" value="Comentario" for="comentario" />
+                            <br/>
+                            <h:inputText class="form-control" id="comentario" value="#{calificacionSesion.cal.comentario}" html5:placeholder="Escribe un comentario" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <h:commandLink 
+                                class="btn btn-success" 
+                                action="#{calificacionSesion.registrarCalificacion()}" 
+                                value="Calificar"
+                                />
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+    </ui:composition>
+</html>
+
