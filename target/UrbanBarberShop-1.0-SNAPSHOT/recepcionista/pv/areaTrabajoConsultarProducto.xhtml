@@ -19,13 +19,13 @@
                         <p:growl id="growl" life="3000"/>
                         <h:form id="frmPrincipal">
                             <p:dataTable id="tabla" emptyMessage="Ningun producto registrado" value="#{productoView.productos}" 
-                                         var="p" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                                         var="p" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom" reflow="true"
                                          >
 
                                 <p:column headerText="">
                                     <p:graphicImage 
-                                        height="50px"
-                                        width="50px"
+                                        height="100px"
+                                        width="100px"
                                         class="rounded mx-auto d-block"
                                         id="fotoPerfil"
                                         value="/ImgServletProducto/#{p.productoFoto}"

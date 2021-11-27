@@ -19,13 +19,13 @@
                         <br/>
                         <h:form id="frmPrincipal">
                             <p:dataTable id="tabla" emptyMessage="Ningún servicio registrado" value="#{servicioView.servicios}" 
-                                         var="s" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                                         var="s" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom" reflow="true"
                                          >
                                 
                                 <p:column headerText="">
                                     <p:graphicImage 
-                                        height="50px"
-                                        width="50px"
+                                        height="100px"
+                                        width="100px"
                                         class="rounded mx-auto d-block"
                                         id="fotoPerfil"
                                         value="/ImgServletServicio/#{s.servicioFoto}"

@@ -13,11 +13,11 @@
             <div class="row">
                 <div class="col">
                     <div class="card-body">
-                        <h5 class="card-title font-weight-bold text-white">Asignar agenda</h5>
+                        <h5 class="card-title font-weight-bold text-white">Registrar factura</h5>
                         <hr class="bg-white"/>
                         <h:form id="frmPrincipal">
                             <p:dataTable id="tabla" emptyMessage="Ninguna cita encontrada" value="#{citaSesion.leerCitasCompletadas()}" 
-                                         var="item" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                                         var="item" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom" reflow="true"
                                          >
                                 
                                 <p:column headerText="Fecha de la cita" filterBy="#{item.fechaCita}" filterMatchMode="contains" >

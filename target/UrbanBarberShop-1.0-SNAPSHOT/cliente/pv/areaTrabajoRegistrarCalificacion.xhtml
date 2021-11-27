@@ -5,7 +5,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:composition>
 
         <p:growl id="growl" life="3000"/>
@@ -16,45 +17,49 @@
                         <h5 class="card-title font-weight-bold text-white">Consultar Fidelización</h5>
                         <br/>
                         <h:form id="frmPrincipal">
-                            <p:dataTable id="tabla" emptyMessage="Ninguna calificación registrada" value="#{citaSesion.leerCitasFidelizacion()}" 
-                                         var="c" paginator="true"  rows="15" rowSelectMode="add" paginatorPosition="bottom"
-                                         >
-
-                                <p:column headerText="Numero de cita" >
-                                    <h:outputText value="#{c.idCita}"  /> 
-                                </p:column>
-
-                                <p:column headerText="Fecha de la cita" filterBy="#{c.fechaCita}" filterMatchMode="contains" >
-                                    <h:outputText value="#{c.fechaCita}"  >
-                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss"/>
-                                    </h:outputText>
-                                </p:column>
-
-                                <p:column headerText="Estado de asignacion" filterBy="#{c.estadoAsignacionIdEstadoAsignacion}" filterMatchMode="contains" >
-                                    <h:outputText value="#{c.estadoAsignacionIdEstadoAsignacion}"  /> 
-                                </p:column>
-
-                                <p:column headerText="Cliente" filterBy="#{c.idCliente}" filterMatchMode="contains" >
-                                    <h:outputText value="#{c.idCliente}"  /> 
-                                </p:column>
-
-                                <p:column headerText="numero barbero" filterBy="#{c.idBarbero}" filterMatchMode="contains" >
-                                    <h:outputText value="#{c.idBarbero}"  /> 
-                                </p:column>                                
-
-                                <p:column headerText=" " exportable="false" >
-
-                                    <h:commandButton class="btn btn-success rounded-pill"
-                                                     html5:data-toggle="modal"
-                                                     html5:data-target="#exampleModalAct"
-                                                     action="#{calificacionSesion.guardarCitaTemporal(c)}" 
-                                                     value="Calificacion" >
-                                        <f:ajax render=":formActualizar"> </f:ajax>
-                                    </h:commandButton>
-
-                                </p:column>
-
-                            </p:dataTable> 
+                            <div class="row">
+                                <c:forEach items="#{citaSesion.leerCitasFidelizacion()}" var="item" varStatus="act" >
+                                    <div class="col-lg-6">
+                                        <div class="card text-dark m-2 shadow-lg">
+                                            <div class="card-header border-0">
+                                                <h3 class="card-title">
+                                                    Fecha:
+                                                    <h:outputText value="#{item.fechaCita}">
+                                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss"/>
+                                                    </h:outputText>
+                                                </h3>
+                                            </div>
+                                            <div class="card-header border-0">
+                                                <h5 class="card-title">Estado: #{item.estadoAsignacionIdEstadoAsignacion}</h5>
+                                                <p>Cliente: #{item.idCliente.nombre} #{item.idCliente.apellido}</p>
+                                                <p>Barbero: #{item.idBarbero.nombre} #{item.idBarbero.apellido}</p>
+                                                <p>
+                                                    Servicios:
+                                                    <ui:repeat value="#{item.servicioCollection}" var="servicios">
+                                                        <h:outputText value="#{servicios.toString()}"/>,<br/>
+                                                    </ui:repeat>
+                                                </p>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col text-center">
+                                                            <h:commandButton 
+                                                                class="btn btn-dark btn-lg btn-block" 
+                                                                html5:data-toggle="modal"
+                                                                html5:data-target="#exampleModalAct"
+                                                                action="#{calificacionSesion.guardarCitaTemporal(c)}" 
+                                                                value="Calificacion" >
+                                                                <f:ajax render=":formActualizar"> </f:ajax>
+                                                            </h:commandButton>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
                         </h:form>
                     </div>
                 </div>

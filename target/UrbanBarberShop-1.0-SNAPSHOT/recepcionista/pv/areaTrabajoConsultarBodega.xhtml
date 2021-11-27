@@ -37,7 +37,7 @@
 
                         <h:form id="frmPrincipal">
                             <p:dataTable id="tabla" emptyMessage="Ninguna bodega registrada" value="#{bodegaSesion.bodegas}" 
-                                         var="item" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                                         var="item" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom" reflow="true"
                                          >
 
                                 <p:column headerText="Nombre de bodega:" filterBy="#{item.nombre}" filterMatchMode="contains" >

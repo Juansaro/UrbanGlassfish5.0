@@ -5,7 +5,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:composition>
 
         <p:growl id="growl" life="3000"/>
@@ -16,35 +17,47 @@
                         <h5 class="card-title font-weight-bold text-white">Consultar Fidelización</h5>
                         <br/>
                         <h:form id="frmPrincipal">
-                            <p:dataTable id="tabla" emptyMessage="Ninguna calificación registrada" value="#{calificacionSesion.leerCalificacionBarbero()}" 
-                                         var="c" paginator="true"  rows="15" rowSelectMode="add" paginatorPosition="bottom"
-                                         >
-                                
-                                <p:column headerText="Fecha" filterBy="#{c.citaTerminada.fechaCita}" filterMatchMode="contains" >
-                                    <h:outputText value="#{c.citaTerminada.fechaCita}"  >
-                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss"/>
-                                    </h:outputText>
-                                </p:column>
-                                
-                                <p:column headerText="Puntaje" >
-                                    <p:rating readonly="true" value="#{c.puntaje}"/>
-                                </p:column>
-                                
-                                <p:column headerText="Servicios"> 
-                                    <ui:repeat value="#{c.citaTerminada.servicioCollection}" var="servicios">
-                                        <h:outputText value="#{servicios.toString()}" /><br/>
-                                    </ui:repeat>
-                                </p:column>
-                                
-                                <p:column headerText="Barbero" filterBy="#{c.citaTerminada.idBarbero.nombre} #{c.citaTerminada.idBarbero.apellido}" filterMatchMode="contains"  >
-                                    <h:outputText value="#{c.citaTerminada.idBarbero.nombre} #{c.citaTerminada.idBarbero.apellido}"/>
-                                </p:column>
 
-                                <p:column headerText="Comentario" >
-                                    <h:outputText value="#{c.comentario}"  /> 
-                                </p:column>
+                            <div class="row">
+                                <c:forEach items="#{calificacionSesion.leerCalificacionBarbero()}" var="c" varStatus="act" >
+                                    <div class="col-lg-6">
 
-                            </p:dataTable> 
+                                        <div class="card text-dark m-2 shadow-lg">
+
+                                            <div class="card-header border-0">
+                                                <h3 class="card-title">
+                                                    Fecha:
+                                                    <h:outputText value="#{c.citaTerminada.fechaCita}">
+                                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss"/>
+                                                    </h:outputText>
+                                                </h3>
+                                            </div>
+                                            <div class="card-header border-0">
+
+                                                <div class="card-body">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col text-center">
+                                                                <h5 class="card-title"><p:rating readonly="true" value="#{c.puntaje}"/></h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <p>Barbero: #{c.citaTerminada.idBarbero.nombre} #{c.citaTerminada.idBarbero.apellido}</p>
+                                                <p>Cliente #{c.citaTerminada.idCliente.nombre} #{c.citaTerminada.idCliente.apellido}</p>
+                                                <p>
+                                                    Servicios:
+                                                    <ui:repeat value="#{c.citaTerminada.servicioCollection}" var="servicios">
+                                                        <h:outputText value="#{servicios.toString()}" /><br/>
+                                                    </ui:repeat>
+                                                </p>
+                                                <p>Comentario: #{c.comentario}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
                         </h:form>
                     </div>
                 </div>

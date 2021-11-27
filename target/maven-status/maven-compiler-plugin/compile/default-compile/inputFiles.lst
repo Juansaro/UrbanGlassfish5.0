@@ -21,7 +21,6 @@ C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barbe
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\DespachoFacadeLocal.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\CompraFacade.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\utilidades\CitaMailAgendado.java
-C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\utilidades\Password.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\ProveedorFacade.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\TipoTelefonoFacade.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\FacturaFacade.java
@@ -67,6 +66,7 @@ C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barbe
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\DetalleDespachoFacade.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\CitaFacade.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\ProveedorFacadeLocal.java
+C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\utilidades\CitaMailRegistro.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\DetalleCompraFacade.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\TipoRolFacadeLocal.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\utilidades\CitaMail.java

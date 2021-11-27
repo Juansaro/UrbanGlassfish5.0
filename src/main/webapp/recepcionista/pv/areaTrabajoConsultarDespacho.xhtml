@@ -17,7 +17,7 @@
                         <br/>
                         <h:form >
                             <p:dataTable id="tabla" emptyMessage="Ningun despacho registrado" value="#{despachoSesion.despachoProductos}" 
-                                         var="item" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                                         var="item" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom" reflow="true"
                                          >
 
                                 <p:column headerText="Fecha despacho" >
@@ -39,10 +39,6 @@
                                         <f:ajax render=":formActualizar"> </f:ajax>
                                     </h:commandButton>
                                 </p:column>
-
-                                <p:column headerText=" " exportable="false" >
-                                    <h:commandLink class="btn btn-danger rounded-pill" action="#{bodegaSesion.eliminarBodega(item)}" value="Eliminar"/>
-                                </p:column>  
                             </p:dataTable>
                         </h:form>
                     </div>

@@ -48,44 +48,23 @@
                         <h:form id="frmPrincipal" styleClass="jsfcrud_list_form">
                             <p:growl id="growl" life="3000"/>
                             <p:dataTable id="tabla" emptyMessage="Ninguna usuario registrado" value="#{usuarioSesion.usuarios}" 
-                                         var="u" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                                         var="u" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom" reflow="true"
                                          >
-                                <p:column headerText="Nombre" filterBy="#{u.nombre}" filterMatchMode="contains" >
+                                <p:column headerText="Nombre:" filterBy="#{u.nombre}" filterMatchMode="contains" >
                                     <h:outputText value="#{u.nombre}"  /> 
                                 </p:column>
 
-                                <p:column headerText="Apellidos" filterBy="#{u.apellido}" filterMatchMode="contains" >
+                                <p:column headerText="Apellidos:" filterBy="#{u.apellido}" filterMatchMode="contains" >
                                     <h:outputText value="#{u.apellido}"  /> 
-                                </p:column>
-
-                                <p:column headerText="Clave:" filterBy="#{u.contrasena}" filterMatchMode="contains" >
-                                    <h:outputText value="#{u.contrasena}"  /> 
                                 </p:column>
 
                                 <p:column headerText="Email:" filterBy="#{u.correo}" filterMatchMode="contains" >
                                     <h:outputText value="#{u.correo}"  /> 
                                 </p:column>
-
-                                <p:column headerText="Documento" filterBy="#{u.numeroDocumento}" filterMatchMode="contains" >
-                                    <h:outputText value="#{u.numeroDocumento}"  /> 
-                                </p:column>
-
-                                <p:column headerText="Numero de telefono:" filterBy="#{u.numeroTelefono}" filterMatchMode="contains" >
-                                    <h:outputText value="#{u.numeroTelefono}"  /> 
-                                </p:column>
                                 
                                 <p:column headerText="Rol" filterBy="#{u.tipoRolNumeroRol}" filterMatchMode="contains" >
                                     <h:outputText value="#{u.tipoRolNumeroRol.descripcion}"  /> 
                                 </p:column>
-                                
-                                <p:column headerText="Ciudad" filterBy="#{u.ciudadNumeroCiudad}" filterMatchMode="contains" >
-                                    <h:outputText value="#{u.ciudadNumeroCiudad}"  /> 
-                                </p:column>
-
-                                <p:column headerText="Tipo identificacion" filterBy="#{u.tipoIdentificacionIdTipoIdentificacion}" filterMatchMode="contains" >
-                                    <h:outputText value="#{u.tipoIdentificacionIdTipoIdentificacion}"  /> 
-                                </p:column>
-
 
                                 <p:column headerText=" " exportable="false" >
 
@@ -104,7 +83,7 @@
                                     <h:commandLink class="btn btn-danger rounded-pill" action="#{usuarioSesion.eliminarUsuario(u)}" value="Eliminar"/>
 
                                 </p:column>  
-                                
+                                <hr/>
                             </p:dataTable>
 
                         </h:form>

@@ -196,15 +196,6 @@ public class CitaSesion implements Serializable {
                                 usu.getUsuLog().getCorreo(),
                                 cit.getFechaCita()
                         );
-                        /*
-                        CitaMailBarbero.correoCita(
-                                usuario.getNombre(),
-                                usuario.getApellido(),
-                                usu.getUsuLog().getNombre(),
-                                usu.getUsuLog().getApellido(),
-                                usuario.getCorreo(),
-                                cit.getFechaCita()
-                        );*/
                         //Limpieza del arrayList temporal
                         listaServiciosEspera.clear();
                         listaUltimaFecha.clear();
@@ -215,6 +206,7 @@ public class CitaSesion implements Serializable {
                         serTemporal = new Servicio();
                         usuario = new Usuario();
                         leerCitasEspera();
+                        cit = new Cita();
                         //Redirección
                         FacesContext.getCurrentInstance().getExternalContext().redirect("/UrbanBarberShop/faces/cliente/consultarCita.xhtml");
                         //Mensaje
@@ -315,31 +307,33 @@ public class CitaSesion implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se cambio el estado", "Se cambio el estado"));
             //this.cita = new Cita();
         } catch (Exception e) {
-            System.out.println("Error");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error de edición", "Error de edición"));
         }
     }
 
     //Eliminar
     public void eliminarCitaCliente(Cita c) {
         try {
+            citTemporal = c;
             citaFacadeLocal.removerServicioCita(c.getIdCita());
-            CitaMailCancelado.correoCita(
-                    c.getIdCliente().getNombre(),
-                    c.getIdCliente().getApellido(),
-                    c.getIdCliente().getCorreo(),
-                    c.getFechaCita()
-            );
-            CitaMailCanceladoBarbero.correoCita(
-                    c.getIdBarbero().getNombre(),
-                    c.getIdBarbero().getApellido(),
-                    c.getIdCliente().getNombre(),
-                    c.getIdCliente().getApellido(),
-                    c.getIdBarbero().getCorreo(),
-                    c.getFechaCita()
-            );
             citaFacadeLocal.remove(c);
             leerCitasEspera();
             leerCitasAgendado();
+            CitaMailCancelado.correoCita(
+                    citTemporal.getIdCliente().getNombre(),
+                    citTemporal.getIdCliente().getApellido(),
+                    citTemporal.getIdCliente().getCorreo(),
+                    citTemporal.getFechaCita()
+            );
+            CitaMailCanceladoBarbero.correoCita(
+                    citTemporal.getIdBarbero().getNombre(),
+                    citTemporal.getIdBarbero().getApellido(),
+                    citTemporal.getIdCliente().getNombre(),
+                    citTemporal.getIdCliente().getApellido(),
+                    citTemporal.getIdBarbero().getCorreo(),
+                    citTemporal.getFechaCita()
+            );
+            citTemporal = new Cita();
             FacesContext.getCurrentInstance()
                     .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cita eliminada", "Cita eliminada")
             );

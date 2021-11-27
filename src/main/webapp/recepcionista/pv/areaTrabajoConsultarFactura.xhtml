@@ -17,7 +17,7 @@
                         <p:growl id="growl" life="3000"/>
                         <h:form styleClass="jsfcrud_list_form">         
                             <p:dataTable id="tabla" emptyMessage="Ninguna factura registrada" value="#{facturaSesion.facturas}" 
-                                         var="f" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                                         var="f" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom" reflow="true"
                                          >
 
                                 <p:column headerText="Fecha de la cita" filterBy="#{f.citaIdCita.fechaCita}" filterMatchMode="contains" >

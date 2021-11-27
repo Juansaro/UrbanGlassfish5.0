@@ -14,7 +14,7 @@
                         <h5 class="card-title font-weight-bold text-white">Consultar facturas</h5>
                         <hr class="bg-white"/>
                         <p:dataTable id="tabla" emptyMessage="Ninguna factura registrada" value="#{facturaSesion.leerFacturasCliente()}" 
-                                     var="f" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                                     var="f" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom" reflow="true"
                                      >
 
                             <p:column headerText="Fecha de la cita" filterBy="#{f.citaIdCita.fechaCita}" filterMatchMode="contains" >

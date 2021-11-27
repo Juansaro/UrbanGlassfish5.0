@@ -21,7 +21,7 @@
                             <h:form id="frmPrincipal">
                                 <p:growl id="growl" life="3000"/>
                                 <p:dataTable id="tabla" emptyMessage="Ningun proveedor registrado" value="#{proveedorSesion.proveedores}" 
-                                             var="p" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                                             var="p" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom" reflow="true"
                                              >
 
                                     <p:column headerText="Nombre" filterBy="#{p.nombre}" filterMatchMode="Nombre" >

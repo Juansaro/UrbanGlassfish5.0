@@ -19,6 +19,7 @@ import com.barber.model.TipoIdentificacion;
 import com.barber.model.TipoRol;
 import com.barber.model.TipoTelefono;
 import com.barber.model.Usuario;
+import com.barber.utilidades.CitaMailRegistro;
 import com.barber.utilidades.Mail;
 import com.barber.utilidades.envioMasivoServicios;
 import java.io.File;
@@ -176,6 +177,7 @@ public class UsuarioSesion implements Serializable {
                 this.usuReg.setTipoTelefonoNumeroTipoTelefono(tipoTelefono);
                 //Principal
                 usuarioFacadeLocal.create(usuReg);
+                CitaMailRegistro.recuperarClaves(usuReg.getNombre(), usuReg.getCorreo(), usuReg.getContrasena());
                 //Limpiar formulario de registro
                 usuReg = new Usuario();
                 usuTemporal = new Usuario();
@@ -325,7 +327,7 @@ public class UsuarioSesion implements Serializable {
             }
 
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exepción de correo", "Exepción de correo"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal", "Error fatal"));
         }
 
     }

@@ -4,10 +4,11 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:composition>
         <p:growl id="growl" life="3000"/>
-        <div class="card container mt-3 mb-3" style="max-width: 55rem;" id="carta">
+        <div class="card container mt-3 mb-3" style="max-width: 80rem;" id="carta">
             <div class="row">
                 <div class="col">
                     <div class="card-body">
@@ -15,42 +16,46 @@
                         <br/>
 
                         <h:form id="frmPrincipal">
-                            <p:growl id="growl" life="3000"/>
-                            <p:dataTable id="tabla" emptyMessage="Ninguna cita registrada" value="#{citaSesion.leerCitasAgendado()}" 
-                                         var="item" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
-                                         >
-                                
-                                <p:column headerText="Fecha de la cita" filterBy="#{item.fechaCita}" filterMatchMode="contains" >
-                                    <h:outputText value="#{item.fechaCita}"  >
-                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss"/>
-                                    </h:outputText>
-                                </p:column>
-
-                                <p:column headerText="Estado de asignacion" filterBy="#{item.estadoAsignacionIdEstadoAsignacion.descripcion}" filterMatchMode="contains" >
-                                    <h:outputText value="#{item.estadoAsignacionIdEstadoAsignacion.descripcion}"/>
-                                </p:column>
-
-                                <p:column headerText="Barbero" filterBy="#{item.idBarbero.nombre}" filterMatchMode="contains" >
-                                    <h:outputText value="#{item.idBarbero.nombre} #{item.idBarbero.apellido}"  /> 
-                                </p:column>
-
-                                <p:column headerText="Servicios"> 
-                                    <ui:repeat value="#{item.servicioCollection}" var="servicios">
-                                        <h:outputText value="#{servicios.toString()}" /><br/>
-                                    </ui:repeat>
-                                </p:column>
-
-                                <p:column headerText="Costo">
-                                    <h:outputText value="#{item.costo}"/>
-                                </p:column>
-
-                                <p:column headerText=" " exportable="false" >
-
-                                    <h:commandLink class="btn btn-danger rounded-pill" action="#{citaSesion.eliminarCitaCliente(item)}" value="Eliminar"/>
-
-                                </p:column>  
-
-                            </p:dataTable>
+                            <div class="row">
+                                <c:forEach items="#{citaSesion.leerCitasAgendado()}" var="item" varStatus="act" >
+                                    <div class="col-lg-6">
+                                        <div class="card text-dark m-2 shadow-lg">
+                                            <div class="card-header border-0">
+                                                <h3 class="card-title">
+                                                    Fecha:
+                                                    <h:outputText value="#{item.fechaCita}">
+                                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss"/>
+                                                    </h:outputText>
+                                                </h3>
+                                            </div>
+                                            <div class="card-header border-0">
+                                                <h5 class="card-title">Estado: #{item.estadoAsignacionIdEstadoAsignacion}</h5>
+                                                <p>Cliente: #{item.idCliente.nombre} #{item.idCliente.apellido}</p>
+                                                <p>Barbero: #{item.idBarbero.nombre} #{item.idBarbero.apellido}</p>
+                                                <p>
+                                                    Servicios:
+                                                    <ui:repeat value="#{item.servicioCollection}" var="servicios">
+                                                        <h:outputText value="#{servicios.toString()}"/>,<br/>
+                                                    </ui:repeat>
+                                                </p>
+                                                <p>Costo total: #{item.costo}</p>                                            
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col text-center">
+                                                            <h:commandButton 
+                                                                class="btn btn-danger btn-lg btn-block" 
+                                                                action="#{citaSesion.eliminarCitaCliente(item)}" 
+                                                                value="Cancelar" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
                         </h:form>
                     </div>
                 </div>

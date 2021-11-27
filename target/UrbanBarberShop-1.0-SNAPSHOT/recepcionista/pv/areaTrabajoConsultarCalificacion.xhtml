@@ -15,7 +15,7 @@
                         <h:form id="frmPrincipal">
                             <p:growl id="growl" life="3000"/>
                             <p:dataTable id="tabla" emptyMessage="Ninguna calificación registrada" value="#{calificacionSesion.calificaciones}" 
-                                         var="c" paginator="true"  rows="15" rowSelectMode="add" paginatorPosition="bottom"
+                                         var="c" paginator="true"  rows="15" rowSelectMode="add" paginatorPosition="bottom" reflow="true"
                                          >
 
                                 <p:column headerText="Fecha" filterBy="#{c.citaTerminada.fechaCita}" filterMatchMode="contains" >

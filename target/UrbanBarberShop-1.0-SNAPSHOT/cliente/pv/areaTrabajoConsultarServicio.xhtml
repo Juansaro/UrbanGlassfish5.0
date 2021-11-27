@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition>
         <div class="card container mt-3 mb-3" style="max-width: 80rem;" id="carta">
             <div class="row">
@@ -12,35 +14,28 @@
                         <h5 class="card-title font-weight-bold text-white">Consultar servicios</h5>
                         <hr class="bg-white"/>
                         <h:form id="frmPrincipal">
-
-                            <p:dataTable id="tabla" emptyMessage="Ninguna servicio registrado" value="#{servicioView.servicios}" 
-                                         var="s" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
-                                         >
-                                
-                                <p:column headerText="">
-                                    <p:graphicImage 
-                                        height="100px"
-                                        width="100px"
-                                        class="rounded mx-auto d-block"
-                                        id="fotoPerfil"
-                                        value="/ImgServletServicio/#{s.servicioFoto}"
-                                        />
-                                </p:column>
-
-                                <p:column headerText="Nombre" filterBy="#{s.nombre}" filterMatchMode="Nombre" >
-                                    <h:outputText value="#{s.nombre}"  /> 
-                                </p:column>
-
-                                <p:column headerText="Descripción" filterBy="#{s.descripcion}" filterMatchMode="Descripción" >
-                                    <h:outputText value="#{s.descripcion}"  /> 
-                                </p:column>
-
-                                <p:column headerText="Costo" filterBy="#{s.costo}" filterMatchMode="Costo" >
-                                    <h:outputText value="#{s.costo}"  /> 
-                                </p:column>
-
-                            </p:dataTable>
-
+                            <div class="row">
+                                <c:forEach items="#{servicioView.servicios}" var="s" varStatus="act" >
+                                    <div class="col-lg-6">
+                                        <div class="card text-dark m-2 shadow-lg">
+                                            <div class="card-header border-0">
+                                                <p:graphicImage 
+                                                    height="100px"
+                                                    width="100px"
+                                                    class="rounded mx-auto d-block"
+                                                    id="fotoPerfil"
+                                                    value="/ImgServletServicio/#{s.servicioFoto}"
+                                                    />
+                                            </div>
+                                            <div class="card-header border-0">
+                                                <h5 class="card-title">Nombre del servicio: #{s.nombre}</h5>
+                                                <p>Descripción: #{s.nombre}</p>
+                                                <p>Costo del servicio: #{s.costo}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
                         </h:form>
                     </div>
                 </div>

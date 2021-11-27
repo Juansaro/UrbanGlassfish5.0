@@ -28,7 +28,7 @@ public class CitaMailAgendado {
         Properties props = new Properties();
         props.setProperty("mail.smtp.host", "smtp.gmail.com"); // envia 
         props.setProperty("mail.smtp.starttls.enable", "true");
-        props.setProperty("mail.smtp.port", "25");
+        props.setProperty("mail.smtp.port", "587");
         props.setProperty("mail.smtp.starttls.required", "false");
         props.setProperty("mail.smtp.auth", "true");
         props.setProperty("mail.smtp.ssl.trust", "smtp.gmail.com");

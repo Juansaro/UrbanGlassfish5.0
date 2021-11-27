@@ -58,6 +58,7 @@ com\barber\EJB\TipoRolFacade.class
 com\barber\EJB\DetalleDespachoFacadeLocal.class
 com\barber\utilidades\CitaMailBarbero.class
 com\barber\model\Proveedor.class
+com\barber\utilidades\CitaMailRegistro.class
 com\barber\model\Servicio_.class
 com\barber\utilidades\CitaMailCancelado.class
 com\barber\utilidades\CitaMailCompletado.class
@@ -77,6 +78,7 @@ com\barber\controller\CiudadSesion.class
 com\barber\EJB\CiudadFacade.class
 com\barber\EJB\UsuarioFacadeLocal.class
 com\barber\controller\RolRequest.class
+com\barber\utilidades\CitaMailRegistro$1.class
 com\barber\EJB\ProveedorFacade.class
 com\barber\model\Compra_.class
 com\barber\model\DetalleDespacho_.class

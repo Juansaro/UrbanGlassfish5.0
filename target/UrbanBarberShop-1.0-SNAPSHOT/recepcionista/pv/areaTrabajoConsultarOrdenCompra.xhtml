@@ -17,7 +17,7 @@
                         <br/>
                         <h:form >
                             <p:dataTable id="tabla" emptyMessage="Ningun despacho registrado" value="#{compraSesion.compras}" 
-                                         var="item" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                                         var="item" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom" reflow="true"
                                          >
                                 <p:column headerText="fecha de compra" >
                                     <h:outputText value="#{item.fechaSolicitud}"  >
@@ -50,7 +50,6 @@
             </div>
         </div>
 
-       
         <div class="modal fade" id="informacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
