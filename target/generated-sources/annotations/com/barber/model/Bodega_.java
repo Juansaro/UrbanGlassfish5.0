@@ -6,7 +6,7 @@ import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-11-27T23:20:24")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-11-28T01:53:03")
 @StaticMetamodel(Bodega.class)
 public class Bodega_ { 
 
