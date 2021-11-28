@@ -26,7 +26,7 @@ public abstract class envioMasivoServicios {
     public static void recuperarCliente(List<String> correos) {
 
         // from email address
-        final String username = "senaland066@gmail.com";
+        final String username = "urbanbarbershopOficial@gmail.com";
 
         // make sure you put your correct password
         final String password = "sennaland 432";
@@ -34,7 +34,7 @@ public abstract class envioMasivoServicios {
         Properties props = new Properties();
         props.setProperty("mail.smtp.host", "smtp.gmail.com"); // envia 
         props.setProperty("mail.smtp.starttls.enable", "true");
-        props.setProperty("mail.smtp.port", "25");
+        props.setProperty("mail.smtp.port", "587");
         props.setProperty("mail.smtp.starttls.required", "false");
         props.setProperty("mail.smtp.auth", "true");
         props.setProperty("mail.smtp.ssl.trust", "smtp.gmail.com");

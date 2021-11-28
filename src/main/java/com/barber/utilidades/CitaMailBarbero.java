@@ -22,13 +22,13 @@ import javax.mail.internet.MimeMessage;
 public class CitaMailBarbero {
     
     public static void correoCita(String nombreBarbero, String apellidoBarbero, String nombreCliente, String apellidoCliente, String correoPara, Date fechaCita) {
-        final String usuario = "senaland066@gmail.com";
+        final String usuario = "urbanbarbershopOficial@gmail.com";
         final String clave = "sennaland 432";
 
         Properties props = new Properties();
         props.setProperty("mail.smtp.host", "smtp.gmail.com"); // envia 
         props.setProperty("mail.smtp.starttls.enable", "true");
-        props.setProperty("mail.smtp.port", "25");
+        props.setProperty("mail.smtp.port", "587");
         props.setProperty("mail.smtp.starttls.required", "false");
         props.setProperty("mail.smtp.auth", "true");
         props.setProperty("mail.smtp.ssl.trust", "smtp.gmail.com");
