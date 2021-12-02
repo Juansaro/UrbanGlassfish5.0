@@ -20,6 +20,7 @@ import com.barber.utilidades.CitaMailCancelado;
 import com.barber.utilidades.CitaMailCanceladoBarbero;
 import com.barber.utilidades.CitaMailCompletado;
 import com.barber.utilidades.CitaMailEspera;
+import com.barber.utilidades.MailFactura;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.ParseException;
@@ -245,7 +246,7 @@ public class CitaSesion implements Serializable {
                         citaIn.getIdCliente().getApellido(),
                         citaIn.getIdCliente().getCorreo(),
                         citaIn.getFechaCita()
-                );                
+                );
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cita terminada", "Cita terminada"));
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error al completar", "Error de cancelación"));

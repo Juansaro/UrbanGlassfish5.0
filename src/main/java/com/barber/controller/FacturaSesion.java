@@ -8,9 +8,10 @@ package com.barber.controller;
 import com.barber.EJB.CitaFacadeLocal;
 import com.barber.EJB.FacturaFacadeLocal;
 import com.barber.model.Cita;
-import static com.barber.model.Cita_.estadoAsignacionIdEstadoAsignacion;
 import com.barber.model.EstadoAsignacion;
 import com.barber.model.Factura;
+import com.barber.utilidades.Mail;
+import com.barber.utilidades.MailFactura;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -90,6 +91,17 @@ public class FacturaSesion implements Serializable{
             fac.setCosto(c.getCosto());
             facturaFacadeLocal.create(fac);
             citaFacadeLocal.edit(c);
+            
+            MailFactura.correoCita(
+                    c.getIdCliente().getNombre(), 
+                    c.getIdCliente().getApellido(), 
+                    c.getIdCliente().getCorreo(), 
+                    c.getFechaCita(), 
+                    c.getIdBarbero().getNombre(), 
+                    c.getIdBarbero().getApellido(), 
+                    c.getServicioCollection(),
+                    c.getCosto()
+            );
             
             facturas = facturaFacadeLocal.findAll();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Factura registrada", "Factura registrada"));

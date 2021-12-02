@@ -13,6 +13,7 @@ com\barber\utilidades\CitaMail$1.class
 com\barber\EJB\ServicioFacadeLocal.class
 com\barber\EJB\TipoTelefonoFacade.class
 com\barber\model\Servicio.class
+com\barber\utilidades\MailFactura$1.class
 com\barber\EJB\EstadoAsignacionFacadeLocal.class
 com\barber\model\TipoIdentificacion_.class
 com\barber\model\DetalleDespacho.class
@@ -22,6 +23,7 @@ com\barber\EJB\DetalleCompraFacadeLocal.class
 com\barber\utilidades\CitaMailAgendado.class
 com\barber\model\Bodega.class
 com\barber\controller\CompraSesion.class
+com\barber\utilidades\MailFactura.class
 com\barber\EJB\CalificacionFacadeLocal.class
 com\barber\EJB\CompraFacade.class
 com\barber\model\EstadoAsignacion_.class

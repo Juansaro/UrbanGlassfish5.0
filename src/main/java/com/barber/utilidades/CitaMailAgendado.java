@@ -22,7 +22,7 @@ import javax.mail.internet.MimeMessage;
 public class CitaMailAgendado {
     
     public static void correoCita(String nombre, String apellido, String correoPara, Date fechaCita) {
-        final String usuario = "surbanbarbershopOficial@gmail.com";
+        final String usuario = "urbanbarbershopOficial@gmail.com";
         final String clave = "sennaland 432";
 
         Properties props = new Properties();

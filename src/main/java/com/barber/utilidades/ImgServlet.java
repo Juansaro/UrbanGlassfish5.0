@@ -67,7 +67,7 @@ public class ImgServlet extends HttpServlet {
             throws ServletException, IOException {
         String archivoNombre = request.getPathInfo().substring(1);
         if (!archivoNombre.isEmpty()) {
-            File carpeta = new File("C:\\ubs\\usuarios\\fotoperfil\\" + archivoNombre);
+            File carpeta = new File("opt\\glassfish\\glassfish\\domains\\domain1\\applications\\UrbanBarberShop\\resources\\img\\" + archivoNombre);
             response.setHeader("Content-Type", getServletContext().getMimeType(archivoNombre));
             response.setHeader("Content-Length", String.valueOf(carpeta.length()));
             response.setHeader("Content-Disposition", "inline; filename =\"" + archivoNombre + "\"");
