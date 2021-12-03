@@ -15,7 +15,7 @@
                     <div class="row ">
                         <div class="card m-2" id="carta" style="width: 18rem;">
                             <h:form id="forarchivo" enctype="multipart/form-data">
-                                
+
                                 <h:graphicImage
                                     height="128px"
                                     width="128px"
@@ -39,12 +39,13 @@
                                             <a href="#" onclick="$('#forarchivo\\:carga').click()" class="btn btn-light">
                                                 Cargar imagen
                                             </a>
+                                            <h5 class="card-title m-1">¡Bienvenido!</h5>
+                                            <h6 class="card-text m-2">${nombre} ${apellido}</h6>
                                         </div>
                                     </div>
                                 </div>
 
-                                <h5 class="card-title m-1">¡Bienvenido! </h5>
-                                <h6 class="card-text m-2">${nombre} ${apellido}</h6>
+
                                 <a href="consultarUsuario.xhtml" class="btn btn-primary btn-lg btn-block">Consultar datos</a>
                             </div>
                         </div>
@@ -52,7 +53,7 @@
                     <div class="row">
                         <div class="card m-2" style="width: 18rem;" id="carta">
                             <div class="card-body">
-                                <h3>Registrar correo másivo a todos los clientes:</h3>
+                                <h3>Registrar correo masivo a todos los clientes:</h3>
                                 <h:form>
                                     <h:commandButton class="btn btn-success btn-lg btn-block" action="#{usuarioSesion.avisoServicios()}" value="Enviar correo másivo"/>
                                 </h:form>
@@ -70,8 +71,8 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title">Citas por facturar: #{citaSesion.acumuladorCitasTerminadas}</h5>
-                                            <a href="consultarFactura.xhtml" class="btn btn-warning btn-lg btn-block mt-1">Facturar</a>
+                                            <h5 class="card-title">Citas por facturar: #{citaSesion.conteoCitasTerminadas()}</h5>
+                                            <a href="registrarFactura.xhtml" class="btn btn-warning btn-lg btn-block mt-1">Facturar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -154,7 +155,7 @@
             <div class="modal-dialog" style="max-width: 60rem;">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title text-dark" id="exampleModalLabel">Promedio de ranking de barberos</h5>
+                        <h5 class="modal-title blog-header-logo text-dark" id="exampleModalLabel">Ranking promedio de barberos</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -169,7 +170,10 @@
 
                                             </div>
                                             <div class="card-header border-0">
-                                                <h5 class="card-title">Nombre del barbero:<b> #{s.citaTerminada.idBarbero} </b></h5>
+                                                <h5 class="card-title">Nombre y apellidos:<b> #{s.citaTerminada.idBarbero.nombre} #{s.citaTerminada.idBarbero.apellido}</b></h5>
+                                                <h5 class="card-title">Correo:<b> #{s.citaTerminada.idBarbero.correo} </b></h5>
+                                                <h5 class="card-title">Teléfono<b> #{s.citaTerminada.idBarbero.numeroTelefono} </b></h5>
+                                                <h5 class="card-title">Puntaje promedio</h5>
                                                 <p:rating readonly="true" value="#{s.puntaje}"/>
                                                 <hr/>
                                                 <h5 class="card-title">Enviar alerta de calificación</h5>

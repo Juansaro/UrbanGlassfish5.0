@@ -55,6 +55,8 @@ public class CalificacionSesion implements Serializable {
     @Inject
     private Usuario usuTemporal;
     @Inject
+    private Usuario barbero;
+    @Inject
     private TipoRol rol;
 
     private Cita citaTemporal;
@@ -69,6 +71,7 @@ public class CalificacionSesion implements Serializable {
 
     @PostConstruct
     public void init() {
+        barbero = new Usuario();
         usuTemporal = new Usuario();
         calificacionesTemporales = new ArrayList<>();
         barberos = new ArrayList<>();
@@ -92,7 +95,7 @@ public class CalificacionSesion implements Serializable {
         for (Usuario Iteradorusu : barberos) {
             usuTemporal = barberos.get(it);
             calificacionesTemporales = calificacionFacadeLocal.leerCalificacionesBarbero(usuTemporal);
-            for(Calificacion iteradorCal : calificacionesTemporales){
+            for (Calificacion iteradorCal : calificacionesTemporales) {
                 calTemporal = calificacionesTemporales.get(itCal);
                 cantidadCalificaciones = calificacionesTemporales.size();
                 acum = acum + Integer.parseInt(calificacionesTemporales.get(itCal).getPuntaje());
@@ -107,31 +110,49 @@ public class CalificacionSesion implements Serializable {
         return calificacionesRanking;
     }
 
+    public Calificacion rankingBarbero() {
+        int it = 0, itCal = 0, cantidadCalificaciones = 0, promedio = 0, acum = 0;
+        barbero = new Usuario();
+        barbero = usuarioFacadeLocal.encontrarUsuarioCorreo(usuSesion.getUsuLog().getCorreo());
+        calificacionesTemporales = calificacionFacadeLocal.leerCalificacionesBarbero(barbero);
+        for (Calificacion iteradorCal : calificacionesTemporales) {
+            calTemporal = calificacionesTemporales.get(itCal);
+            cantidadCalificaciones = calificacionesTemporales.size();
+            acum = acum + Integer.parseInt(calificacionesTemporales.get(itCal).getPuntaje());
+            itCal++;
+        }
+        itCal = 0;
+        promedio = acum / cantidadCalificaciones;
+        calTemporal.setPuntaje(String.valueOf(promedio));
+        it++;
+        return calTemporal;
+    }
+
     public void guardarCitaTemporal(Cita c) {
         citaTemporal = c;
     }
-    
-    public void enviarCalificacionBarbero(Calificacion calificacionIn){
-        
-        if(Integer.parseInt(calificacionIn.getPuntaje()) >= 4){
-            
+
+    public void enviarCalificacionBarbero(Calificacion calificacionIn) {
+
+        if (Integer.parseInt(calificacionIn.getPuntaje()) >= 4) {
+
             MailBuenaCalificacion.buenaCalificación(calificacionIn.getCitaTerminada().getIdBarbero().getNombre(), calificacionIn.getCitaTerminada().getIdBarbero().getCorreo());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correo envíado", "Correo envíado"));
-        
-        } else if(Integer.parseInt(calificacionIn.getPuntaje()) == 3){
-            
+
+        } else if (Integer.parseInt(calificacionIn.getPuntaje()) == 3) {
+
             MailMediaCalificacion.mediaCalificación(calificacionIn.getCitaTerminada().getIdBarbero().getNombre(), calificacionIn.getCitaTerminada().getIdBarbero().getCorreo());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correo envíado", "Correo envíado"));
-        
+
         } else if (Integer.parseInt(calificacionIn.getPuntaje()) == 2 || Integer.parseInt(calificacionIn.getPuntaje()) == 1) {
-            
+
             MailBajaCalificacion.bajaCalificación(calificacionIn.getCitaTerminada().getIdBarbero().getNombre(), calificacionIn.getCitaTerminada().getIdBarbero().getCorreo());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correo envíado", "Correo envíado"));
-        
+
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error de envío de mail", "Error de envío de mail"));
         }
-        
+
     }
 
     //Registrar

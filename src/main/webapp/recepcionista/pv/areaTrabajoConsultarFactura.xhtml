@@ -29,6 +29,10 @@
                                 <p:column headerText="Barbero" filterBy="#{f.citaIdCita.idBarbero.nombre}" filterMatchMode="contains" >
                                     <h:outputText value="#{f.citaIdCita.idBarbero.nombre} #{f.citaIdCita.idBarbero.apellido}"  /> 
                                 </p:column>
+                                
+                                <p:column headerText="Cliente" filterBy="#{f.citaIdCita.idCliente.nombre}" filterMatchMode="contains" >
+                                    <h:outputText value="#{f.citaIdCita.idCliente.nombre} #{f.citaIdCita.idCliente.apellido}"  /> 
+                                </p:column>
 
                                 <p:column headerText="Servicios"> 
                                     <ui:repeat value="#{f.citaIdCita.servicioCollection}" var="servicios">

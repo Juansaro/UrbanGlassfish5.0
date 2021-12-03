@@ -88,10 +88,12 @@ public class CitaSesion implements Serializable {
     private List<Servicio> listaServiciosEspera = new ArrayList<>();
     private List<Cita> listaUltimaFecha = new ArrayList<>();
     private List<Cita> citasTerminadas = new ArrayList<>();
+    private List<Cita> citasConfirmadas = new ArrayList<>();
 
     //Formato de fecha y hora actual
     private float cit_costototal = 0;
     private int acumuladorCitasTerminadas = 0;
+    private int acumuladorCitasConfirmadas = 0;
 
     private Servicio serTemporal;
     private Cita cit;
@@ -124,12 +126,21 @@ public class CitaSesion implements Serializable {
         //Limpieza del acumulador del costo total en 0
         cit_costototal = 0;
         conteoCitasTerminadas();
+        conteoCitasAgendadas();
     }
 
-    public void conteoCitasTerminadas(){
+    public int conteoCitasTerminadas(){
         acumuladorCitasTerminadas = 0;
         citasTerminadas = citaFacadeLocal.leerCitaCompletada(asignacionCompletada);
         acumuladorCitasTerminadas = citasTerminadas.size();
+        return acumuladorCitasTerminadas;
+    }
+    
+    public int conteoCitasAgendadas(){
+        acumuladorCitasConfirmadas = 0;
+        citasConfirmadas = citaFacadeLocal.leerCitasAgendado(usu.getUsuLog(),asignacionAgendada);
+        acumuladorCitasConfirmadas = citasConfirmadas.size();
+        return acumuladorCitasConfirmadas;
     }
     
     public void cargaServiciosSolicitados(Servicio srIn) {
