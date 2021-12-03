@@ -16,12 +16,20 @@
                         <button type="button" class="btn btn-success mt-3 mb-3 mr3" data-toggle="modal" data-target="#registrar">
                             Registrar servicio
                         </button>
+
+                        <hr/>
+                        <h5 class="card-title">Reporte de servicios más utilizados</h5>
+                        <h:form>
+                            <h:commandButton action="#{servicioView.generarArchivo('pdf')}"  class=" ml-2 btn btn-sm btn-dark" value=".pdf"></h:commandButton>
+                            <h:commandButton action="#{servicioView.generarArchivo('xlsx')}"  class=" ml-2 btn btn-sm btn-dark" value=".xlsx"></h:commandButton>
+                            <h:commandButton action="#{servicioView.generarArchivo('docx')}"  class=" ml-2 btn btn-sm btn-dark" value=".docx"></h:commandButton>
+                        </h:form>
                         <br/>
                         <h:form id="frmPrincipal">
                             <p:dataTable id="tabla" emptyMessage="Ningún servicio registrado" value="#{servicioView.servicios}" 
                                          var="s" paginator="true"  rows="10" rowSelectMode="add" paginatorPosition="bottom" reflow="true"
                                          >
-                                
+
                                 <p:column headerText="">
                                     <p:graphicImage 
                                         height="100px"
@@ -42,7 +50,7 @@
                                         <f:ajax render=":frmFoto"> </f:ajax>
                                     </h:commandButton>
                                 </p:column>
-                                
+
                                 <p:column headerText="Nombre" filterBy="#{s.nombre}" filterMatchMode="Nombre" >
                                     <h:outputText value="#{s.nombre}"  /> 
                                 </p:column>
@@ -94,7 +102,7 @@
                         <div class="modal-body"> 
                             <h:outputLabel class="card-text font-weight-bold" value="Nombre" for="nombreProducto" />
                             <h:inputText value="#{servicioView.serTemporal.nombre}" required="true" html5:placeholder="Nombre" id="nombre" class="form-control"/><br/>
-                            
+
                             <h:outputLabel class="card-text font-weight-bold" value="Descripción" for="descripcion" />
                             <h:inputText value="#{servicioView.serTemporal.descripcion}" class="form-control" id="descripcion" required="true" html5:placeholder="Descripción" /><br/>
 
@@ -110,7 +118,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="modal fade" id="registrar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog text-dark">
                 <div class="modal-content">
@@ -124,7 +132,7 @@
                         <div class="modal-body"> 
                             <h:outputLabel class="card-text font-weight-bold" value="Nombre" for="nombre" />
                             <h:inputText value="#{servicioView.ser.nombre}" required="true" html5:placeholder="Nombre" id="nombre" class="form-control"/><br/>
-                            
+
                             <h:outputLabel class="card-text font-weight-bold" value="Descripción" for="descripcion" />
                             <h:inputText value="#{servicioView.ser.descripcion}" class="form-control" id="descripcion" required="true" html5:placeholder="Descripción" /><br/>
 
@@ -140,7 +148,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="modal fade" id="foto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog text-dark">
                 <div class="modal-content">

@@ -10,7 +10,6 @@ package com.barber.utilidades;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import com.barber.model.Usuario;
 import java.util.List;
 import java.util.Properties;
 import javax.mail.Message;

@@ -15,7 +15,6 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -44,33 +43,27 @@ public class ProveedorSesion implements Serializable{
     public void registrarProveedor(){
         try {
             proveedorFacadeLocal.create(pro);
-            proveedores = proveedorFacadeLocal.findAll();
+            proveedores = proveedorFacadeLocal.leerTodos();
+            pro = new Proveedor();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Proveedor registrado", "Proveedor registrado"));
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/UrbanBarberShop/faces/recepcionista/consultarProveedor.xhtml");
         } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error de registro", "Error de registro"));
         }
     }
-    
-    //Preparar página para 
-    public String prepararEliminar(){
-        proveedores = proveedorFacadeLocal.findAll();
-        return "/RecepProveedorConsultar.xhtml";
-    }
-    
+ 
     //Recupera datos del proveedor al cual se va a editar
-     public String guardarTemporal(Proveedor p) {
+     public void guardarTemporal(Proveedor p) {
         proTemporal = p;
-        return "/RecepProveedorModificar.xhtml";
     }
 
     //Editar proveedor (En el modal)
     public void editarProveedor() {
         try {
             proveedorFacadeLocal.edit(proTemporal);
-            this.proveedor = new Proveedor();
+            proveedor = new Proveedor();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Proveedor editado", "Proveedor editado"));
         } catch (Exception e) {
-            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error de edición", "Error de edición"));
         }
 
     }
@@ -78,13 +71,11 @@ public class ProveedorSesion implements Serializable{
     //Eliminar
     public void eliminarProveedor(Proveedor p){
         try{
-            this.proveedorFacadeLocal.remove(p);
-            this.proveedor = new Proveedor();
+            proveedorFacadeLocal.remove(p);
+            proveedorFacadeLocal.leerTodos();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Proveedor eliminado", "Proveedor eliminado"));
-            //Colocar prepararEliminar()
-            prepararEliminar();
         }catch(Exception e){
-            e.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error de eliminación", "Error de eliminación"));
         }
     }
     

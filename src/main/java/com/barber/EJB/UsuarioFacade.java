@@ -137,14 +137,15 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     }
     
     @Override
-    public List<Usuario> leerBarberos() {
+    public List<Usuario> leerBarberos(TipoRol rol) {
         try {
             em.getEntityManagerFactory().getCache().evictAll();
-            Query qt = em.createQuery("SELECT u FROM Usuario u WHERE u.tipoRolNumeroRol = (?2)");
+            Query qt = em.createQuery("SELECT u FROM Usuario u WHERE u.tipoRolNumeroRol = :numero");
+            qt.setParameter("numero", rol);
             return qt.getResultList();
         } catch (Exception e) {
             return null;
         }
-    }
+    }    
     
 }

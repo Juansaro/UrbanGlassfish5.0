@@ -49,6 +49,6 @@ public interface UsuarioFacadeLocal {
 
     public boolean crearUsuario(String usu_nombre, String usu_apellido, String usu_contrasena, String usu_correo, int fk_ciudad, int fk_rol, int fk_identificacion, String usu_identificacion, int fk_telefono, String usu_telefono);
 
-    public List<Usuario> leerBarberos();
+    public List<Usuario> leerBarberos(TipoRol rol);
 
 }

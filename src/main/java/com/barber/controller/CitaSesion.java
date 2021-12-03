@@ -15,12 +15,10 @@ import com.barber.model.Servicio;
 import com.barber.model.Usuario;
 import com.barber.utilidades.CitaMail;
 import com.barber.utilidades.CitaMailAgendado;
-import com.barber.utilidades.CitaMailBarbero;
 import com.barber.utilidades.CitaMailCancelado;
 import com.barber.utilidades.CitaMailCanceladoBarbero;
 import com.barber.utilidades.CitaMailCompletado;
 import com.barber.utilidades.CitaMailEspera;
-import com.barber.utilidades.MailFactura;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.ParseException;
@@ -89,9 +87,11 @@ public class CitaSesion implements Serializable {
     private List<Servicio> listaServiciosAgendados = new ArrayList<>();
     private List<Servicio> listaServiciosEspera = new ArrayList<>();
     private List<Cita> listaUltimaFecha = new ArrayList<>();
+    private List<Cita> citasTerminadas = new ArrayList<>();
 
     //Formato de fecha y hora actual
     private float cit_costototal = 0;
+    private int acumuladorCitasTerminadas = 0;
 
     private Servicio serTemporal;
     private Cita cit;
@@ -123,8 +123,15 @@ public class CitaSesion implements Serializable {
         listaUltimaFecha.clear();
         //Limpieza del acumulador del costo total en 0
         cit_costototal = 0;
+        conteoCitasTerminadas();
     }
 
+    public void conteoCitasTerminadas(){
+        acumuladorCitasTerminadas = 0;
+        citasTerminadas = citaFacadeLocal.leerCitaCompletada(asignacionCompletada);
+        acumuladorCitasTerminadas = citasTerminadas.size();
+    }
+    
     public void cargaServiciosSolicitados(Servicio srIn) {
         listaServiciosEspera.add(srIn);
         cit_costototal = cit_costototal + srIn.getCosto();
@@ -437,14 +444,6 @@ public class CitaSesion implements Serializable {
         this.cit = cit;
     }
 
-    public CitaFacadeLocal getCitaFacadeLocal() {
-        return citaFacadeLocal;
-    }
-
-    public void setCitaFacadeLocal(CitaFacadeLocal citaFacadeLocal) {
-        this.citaFacadeLocal = citaFacadeLocal;
-    }
-
     public EstadoAsignacion getEstadoAsignacion() {
         return estadoAsignacion;
     }
@@ -539,6 +538,14 @@ public class CitaSesion implements Serializable {
 
     public void setListaUltimaFecha(List<Cita> listaUltimaFecha) {
         this.listaUltimaFecha = listaUltimaFecha;
+    }
+
+    public int getAcumuladorCitasTerminadas() {
+        return acumuladorCitasTerminadas;
+    }
+
+    public void setAcumuladorCitasTerminadas(int acumuladorCitasTerminadas) {
+        this.acumuladorCitasTerminadas = acumuladorCitasTerminadas;
     }
 
 }
