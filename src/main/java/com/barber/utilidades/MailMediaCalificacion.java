@@ -46,12 +46,13 @@ public abstract class MailMediaCalificacion {
             MimeMessage mensage = new MimeMessage(session);
             mensage.setFrom(new InternetAddress(usuario));
             mensage.addRecipient(Message.RecipientType.TO, new InternetAddress(correoPara));
-            mensage.setSubject("Hola!" + nombreUsuario +" has tenido un rendimiento medio en Urban baber shop.");
+            mensage.setSubject("Hola! " + nombreUsuario +" has tenido un rendimiento medio en Urban baber shop.");
             mensage.setContent("<center> "
                     + "</center>"
                     + "<br/>"
                     + "<h1> Estimado barbero "+ nombreUsuario +" </h1>"
                     + "<br/>"
+                    + "Has tenido un rendimiento medio en urban barber shop <br/>"
                     + "Recuerda subir tu promedio de calificación para que la calidad del servicio sea el esperado por el cliente<br/> "
                     + "<br/>"
                     + "Toma en cuenta las reseñas",

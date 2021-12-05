@@ -74,6 +74,7 @@ public class CalificacionSesion implements Serializable {
         barbero = new Usuario();
         usuTemporal = new Usuario();
         calificacionesTemporales = new ArrayList<>();
+        calificacionesRanking = new ArrayList<>();
         barberos = new ArrayList<>();
         calificacionesRanking = new ArrayList<>();
         calificaciones = calificacionFacadeLocal.leerTdos();
@@ -86,12 +87,13 @@ public class CalificacionSesion implements Serializable {
         citas = citaFacadeLocal.leerCitas(asignacionTemporal);
         calificacion = new Calificacion();
         citaTemporal = new Cita();
+        rankingBarberos();
     }
 
-    public List<Calificacion> rankingBarberos() {
+    public void rankingBarberos() {
+        calificacionesRanking.clear();
         int it = 0, itCal = 0, cantidadCalificaciones = 0, promedio = 0, acum = 0;
         barberos = usuarioFacadeLocal.leerBarberos(rol);
-        calificacionesRanking = new ArrayList<>();
         for (Usuario Iteradorusu : barberos) {
             usuTemporal = barberos.get(it);
             calificacionesTemporales = calificacionFacadeLocal.leerCalificacionesBarbero(usuTemporal);
@@ -101,18 +103,40 @@ public class CalificacionSesion implements Serializable {
                 acum = acum + Integer.parseInt(calificacionesTemporales.get(itCal).getPuntaje());
                 itCal++;
             }
+            calTemporal.setIdCalificacion(it);
+            if (calificacionesTemporales.isEmpty()) {
+                citaTemporal.setIdBarbero(usuTemporal);
+                calTemporal.setCitaTerminada(citaTemporal);
+                calTemporal.setPuntaje("0");
+                calificacionesRanking.add(calTemporal);
+                calTemporal = new Calificacion();
+                citaTemporal = new Cita();
+            } else {
+                promedio = acum / cantidadCalificaciones;
+                calTemporal.setPuntaje(String.valueOf(promedio));
+                calificacionesRanking.add(calTemporal);
+                calTemporal = new Calificacion();
+                calificacionesTemporales.clear();
+            }
+            cantidadCalificaciones = 0;
+            acum = 0;
+            promedio = 0;
             itCal = 0;
-            promedio = acum / cantidadCalificaciones;
-            calTemporal.setPuntaje(String.valueOf(promedio));
-            calificacionesRanking.add(calTemporal);
             it++;
         }
-        return calificacionesRanking;
+        usuTemporal = new Usuario();
+        barberos.clear();
+        calTemporal = new Calificacion();
+        cantidadCalificaciones = 0;
+        promedio = 0;
+        acum = 0;
+        it = 0;
     }
 
     public Calificacion rankingBarbero() {
         int it = 0, itCal = 0, cantidadCalificaciones = 0, promedio = 0, acum = 0;
         barbero = new Usuario();
+        calTemporal = new Calificacion();
         barbero = usuarioFacadeLocal.encontrarUsuarioCorreo(usuSesion.getUsuLog().getCorreo());
         calificacionesTemporales = calificacionFacadeLocal.leerCalificacionesBarbero(barbero);
         for (Calificacion iteradorCal : calificacionesTemporales) {
@@ -122,6 +146,10 @@ public class CalificacionSesion implements Serializable {
             itCal++;
         }
         itCal = 0;
+        if (calificacionesTemporales.isEmpty()) {
+            calTemporal.setPuntaje("0");
+            return calTemporal;
+        }
         promedio = acum / cantidadCalificaciones;
         calTemporal.setPuntaje(String.valueOf(promedio));
         it++;

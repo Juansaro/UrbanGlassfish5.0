@@ -64,6 +64,7 @@ com\barber\utilidades\CitaMailRegistro.class
 com\barber\model\Servicio_.class
 com\barber\utilidades\CitaMailCancelado.class
 com\barber\utilidades\CitaMailCompletado.class
+com\barber\utilidades\MailBuenaCalificacion.class
 com\barber\EJB\ProductoFacadeLocal.class
 com\barber\model\Cita_.class
 com\barber\model\TipoRol_.class
@@ -83,8 +84,10 @@ com\barber\controller\RolRequest.class
 com\barber\utilidades\CitaMailRegistro$1.class
 com\barber\EJB\ProveedorFacade.class
 com\barber\model\Compra_.class
+com\barber\utilidades\MailBajaCalificacion.class
 com\barber\model\DetalleDespacho_.class
 com\barber\model\Usuario_.class
+com\barber\utilidades\MailBajaCalificacion$1.class
 com\barber\EJB\TipoIdentificacionFacadeLocal.class
 com\barber\model\Producto.class
 com\barber\controller\EstadoAsignacionRequest.class
@@ -101,9 +104,12 @@ com\barber\EJB\TipoRolFacadeLocal.class
 com\barber\model\Calificacion.class
 com\barber\model\Despacho_.class
 com\barber\utilidades\envioMasivoServicios$1.class
+com\barber\utilidades\MailBuenaCalificacion$1.class
+com\barber\utilidades\MailMediaCalificacion.class
 com\barber\model\Producto_.class
 com\barber\model\TipoTelefono.class
 com\barber\EJB\TipoIdentificacionFacade.class
 com\barber\controller\CitaSesion.class
 com\barber\model\Proveedor_.class
 com\barber\utilidades\CitaMailEspera.class
+com\barber\utilidades\MailMediaCalificacion$1.class

@@ -123,7 +123,6 @@ public class CitaSesion implements Serializable {
         cita = new Cita();
         listaServiciosEspera.clear();
         listaUltimaFecha.clear();
-        //Limpieza del acumulador del costo total en 0
         cit_costototal = 0;
         conteoCitasTerminadas();
         conteoCitasAgendadas();

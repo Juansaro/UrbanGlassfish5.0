@@ -61,7 +61,7 @@
                                     <div class="col-md-8">
                                         <div class="card-body">
                                             <h5 class="card-title">Citas confirmadas: #{citaSesion.conteoCitasAgendadas()}</h5>
-                                            <a href="consultarFactura.xhtml" class="btn btn-dark btn-lg btn-block mt-1">Consultar</a>
+                                            <a href="consultarCitasAgendadas.xhtml" class="btn btn-dark btn-lg btn-block mt-1">Consultar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -75,14 +75,8 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title">Facturas generadas</h5>
-                                            <button 
-                                                type="button"
-                                                class="ml-2 btn btn-dark btn-lg btn-block"  
-                                                data-toggle="modal"
-                                                data-target="#ranking">
-                                                Consultar
-                                            </button>
+                                            <h5 class="card-title">Facturas generadas #{facturaSesion.conteoFacturas()}</h5>
+                                            <a href="consultarFactura.xhtml" class="btn btn-dark btn-lg btn-block mt-1">Consultar</a>
                                         </div>
                                     </div>
                                 </div>

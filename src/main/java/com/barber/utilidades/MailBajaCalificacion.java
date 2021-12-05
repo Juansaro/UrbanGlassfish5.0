@@ -45,7 +45,7 @@ public abstract class MailBajaCalificacion {
             MimeMessage mensage = new MimeMessage(session);
             mensage.setFrom(new InternetAddress(usuario));
             mensage.addRecipient(Message.RecipientType.TO, new InternetAddress(correoPara));
-            mensage.setSubject("Hola!" + nombreUsuario +" has tenido un bajo rendimiento en Urban baber shop.");
+            mensage.setSubject("Hola! " + nombreUsuario +" has tenido un bajo rendimiento en Urban baber shop.");
             mensage.setContent("<center> "
                     + "</center>"
                     + "<br/>"
@@ -53,9 +53,9 @@ public abstract class MailBajaCalificacion {
                     + "<br/>"
                     + "Es de suma urgencia que subas tu promedio brindando una mejor calidad de servicio."
                     + "<br/>"
-                    + "Recuerda responder de forma oportuna tus citas pendientes y agendadas"
-                    + "así como prestar un servicio optimo al cliente"
-                    + "Toma en cuenta las reseñas",
+                    + "Recuerda responder de forma oportuna tus citas pendientes y agendadas "
+                    + "así como prestar un servicio optimo al cliente.<br/>"
+                    + "Toma en cuenta las reseñas.",
                     "text/html");
             Transport.send(mensage);
         } catch (MessagingException e) {

@@ -74,47 +74,6 @@
                                 </c:forEach>
                             </div>
 
-                            <p:dataTable id="tabla" emptyMessage="Ninguna calificación registrada" value="#{calificacionSesion.leerCalificacionCliente()}" 
-                                         var="c" paginator="true"  rows="15" rowSelectMode="add" paginatorPosition="bottom"
-                                         >
-
-                                <p:column headerText="Fecha" filterBy="#{c.citaTerminada.fechaCita}" filterMatchMode="contains" >
-                                    <h:outputText value="#{c.citaTerminada.fechaCita}"  >
-                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss"/>
-                                    </h:outputText>
-                                </p:column>
-
-                                <p:column headerText="Puntaje" >
-                                    <p:rating readonly="true" value="#{c.puntaje}"/>
-                                </p:column>
-
-                                <p:column headerText="Servicios"> 
-                                    <ui:repeat value="#{c.citaTerminada.servicioCollection}" var="servicios">
-                                        <h:outputText value="#{servicios.toString()}" /><br/>
-                                    </ui:repeat>
-                                </p:column>
-
-                                <p:column headerText="Barbero" filterBy="#{c.citaTerminada.idBarbero.nombre} #{c.citaTerminada.idBarbero.apellido}" filterMatchMode="contains"  >
-                                    <h:outputText value="#{c.citaTerminada.idBarbero.nombre} #{c.citaTerminada.idBarbero.apellido}"/>
-                                </p:column>
-
-                                <p:column headerText="Comentario" >
-                                    <h:outputText value="#{c.comentario}"  /> 
-                                </p:column>
-
-                                <p:column headerText=" " exportable="false" >
-
-                                    <h:commandButton class="btn btn-warning rounded-pill"
-                                                     html5:data-toggle="modal"
-                                                     html5:data-target="#exampleModalAct" 
-                                                     action="#{calificacionSesion.guardarTemporal(c)}" 
-                                                     value="Editar" >
-                                        <f:ajax render=":formActualizar"> </f:ajax>
-                                    </h:commandButton>
-
-                                </p:column>
-
-                            </p:dataTable> 
                         </h:form>
                     </div>
                 </div>

@@ -10,7 +10,6 @@ import com.barber.EJB.FacturaFacadeLocal;
 import com.barber.model.Cita;
 import com.barber.model.EstadoAsignacion;
 import com.barber.model.Factura;
-import com.barber.utilidades.Mail;
 import com.barber.utilidades.MailFactura;
 import java.io.File;
 import java.io.IOException;
@@ -70,9 +69,12 @@ public class FacturaSesion implements Serializable{
     
     private List<Factura> facturas;
     private List<Cita> citas;
+    private List<Factura> facturasTemporales;
     
     private Factura fac = new Factura();
     private Factura facTemporal = new Factura();
+    
+    private int acumuladorFacturas = 0;
     
     @PostConstruct
     public void init(){
@@ -81,6 +83,14 @@ public class FacturaSesion implements Serializable{
         citas = citaFacadeLocal.findAll();
         facturas = facturaFacadeLocal.findAll();
         factura = new Factura();
+        conteoFacturas();
+    }
+    
+    public int conteoFacturas(){
+        acumuladorFacturas = 0;
+        facturasTemporales = facturaFacadeLocal.leerFacturasCliente(usu.getUsuLog());
+        acumuladorFacturas = facturasTemporales.size();
+        return acumuladorFacturas;
     }
     
     //Registrar Factura

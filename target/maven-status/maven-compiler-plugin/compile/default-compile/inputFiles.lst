@@ -28,6 +28,7 @@ C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barbe
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\DespachoFacade.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\utilidades\ImgServletServicio.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\model\Factura.java
+C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\utilidades\MailBajaCalificacion.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\controller\ProductoView.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\CalificacionFacadeLocal.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\ServicioFacadeLocal.java
@@ -58,6 +59,7 @@ C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barbe
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\controller\BodegaSesion.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\BodegaFacadeLocal.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\model\EstadoAsignacion.java
+C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\utilidades\MailBuenaCalificacion.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\UsuarioFacadeLocal.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\controller\ProveedorSesion.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\AbstractFacade.java
@@ -79,3 +81,4 @@ C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barbe
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\CiudadFacade.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\ServicioFacade.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\BodegaFacade.java
+C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\utilidades\MailMediaCalificacion.java
