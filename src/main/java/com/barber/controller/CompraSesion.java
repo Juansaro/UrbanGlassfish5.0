@@ -8,6 +8,7 @@ import com.barber.model.Compra;
 import com.barber.model.DetalleCompra;
 import com.barber.model.Producto;
 import com.barber.model.Proveedor;
+import com.barber.utilidades.MailCompraProveedor;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,7 +16,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -58,7 +58,6 @@ public class CompraSesion implements Serializable {
     private List<Producto> productos;
     // Create a HashMap object called capitalCities
     private Integer indiceTemporal;
-
 
     private Compra com;
     private Compra comTemporal;
@@ -117,7 +116,7 @@ public class CompraSesion implements Serializable {
                 detalleIn.setCostoTotal(acum);
                 //Agregación
                 acumuladorCostoTotal = acumuladorCostoTotal + acum;
-                
+
                 detalles.add(detalleIn);
                 detalleIn = new DetalleCompra();
                 productoIn = new Producto();
@@ -148,32 +147,60 @@ public class CompraSesion implements Serializable {
     public void registrarCompra() {
         try {
             int contador = 0;
-            com.setRecepcionista(u.getUsuLog());
-            com.setNumeroProveedor(proveedor);
-            compraFacadeLocal.create(com);
-            int idCompra = com.getNumeroCompra();
-            for (DetalleCompra it : detalles) {
-                detalleIn = detalles.get(contador);
-                detalleIn.setNumeroDetalle(null);//Se establece como null porque tiene llave autoincremental
-                int cantidad = detalleIn.getCantidadSolicitada();
-                Date fechaRecibido = detalleIn.getFechaRecibido();
-                int pIn = detalleIn.getProductoIdProducto().getIdProducto();
-                float costo = detalleIn.getCostoTotal();
-                detalleIn.setNumeroCompra(com);
-                detalleCompraFacadeLocal.registrarDetalleCompra(idCompra, cantidad, fechaRecibido, pIn, costo);
-                contador++;
+            if (proveedor.getNumeroProveedor() != null) {
+                if (!detalles.isEmpty()) {
+                    com.setRecepcionista(u.getUsuLog());
+                    com.setFechaSolicitud(ObtenerFechaActual());
+                    com.setNumeroProveedor(proveedor);
+                    compraFacadeLocal.create(com);
+                    int idCompra = com.getNumeroCompra();
+                    for (DetalleCompra it : detalles) {
+                        detalleIn = detalles.get(contador);
+                        detalleIn.setNumeroDetalle(null);//Se establece como null porque tiene llave autoincremental
+                        int cantidad = detalleIn.getCantidadSolicitada();
+                        Date fechaRecibido = detalleIn.getFechaRecibido();
+                        int pIn = detalleIn.getProductoIdProducto().getIdProducto();
+                        float costo = detalleIn.getCostoTotal();
+                        detalleIn.setNumeroCompra(com);
+                        detalleCompraFacadeLocal.registrarDetalleCompra(idCompra, cantidad, fechaRecibido, pIn, costo);
+                        contador++;
+                    }
+                    MailCompraProveedor.correoCompra(
+                            com.getNumeroProveedor().getNombre(),
+                            com.getNumeroProveedor().getApellidos(),
+                            com.getNumeroProveedor().getCorreo(),
+                            com.getFechaSolicitud(),
+                            acumuladorCostoTotal,
+                            detalles    
+                    );
+                    contador = 0;
+                    limpiezaCompra();
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Compra registrada", "Compra registrada"));
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/UrbanBarberShop/faces/recepcionista/consultarOrdenCompra.xhtml");
+                } else {
+                    contador = 0;
+                    limpiezaCompra();
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Debes tener por lo menos un producto seleccionado", "Debes tener por lo menos un producto seleccionado"));
+                }
+            } else {
+                contador = 0;
+                limpiezaCompra();
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "No un hay proveedor seleccionado", "No un hay proveedor seleccionado"));
             }
-            contador = 0;
-            acumuladorCostoTotal = 0;
-            indiceTemporal = 0;
-            detalles = new ArrayList<>();
-            detalleIn = new DetalleCompra();
-            proveedor = new Proveedor();
-            detalles = new ArrayList<>();
-            compras = compraFacadeLocal.leerTodos();
         } catch (Exception e) {
-        
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal", "Error fatal"));
         }
+    }
+
+    public void limpiezaCompra() {
+        com = new Compra();
+        acumuladorCostoTotal = 0;
+        indiceTemporal = 0;
+        detalles = new ArrayList<>();
+        detalleIn = new DetalleCompra();
+        proveedor = new Proveedor();
+        detalles = new ArrayList<>();
+        compras = compraFacadeLocal.leerTodos();
     }
 
     public void guardarTemporal(Compra c) {
@@ -196,7 +223,7 @@ public class CompraSesion implements Serializable {
         } catch (Exception e) {
         }
     }
-    
+
     public void consultarDetallesCompras(Compra c) {
         detallesSolicitados = detalleCompraFacadeLocal.leerCompras(c);
     }

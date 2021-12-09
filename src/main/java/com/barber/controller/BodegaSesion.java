@@ -51,35 +51,39 @@ import org.primefaces.PrimeFaces;
  */
 @Named(value = "bodegaSesion")
 @SessionScoped
-public class BodegaSesion implements Serializable{
-    
+public class BodegaSesion implements Serializable {
+
     @EJB
     private BodegaFacadeLocal bodegaFacadeLocal;
-    
+
     //recurso
     @Resource(lookup = "jdbc/defUrban")
     DataSource dataSource;
-    
-    
+
     private Bodega bodega;
     private List<Bodega> bodegas;
-    
+
     private Bodega bod;
     private Bodega bodTemporal;
-    
+
     private Part archivoCarga;
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         bodegas = bodegaFacadeLocal.leerTodos();
         bodega = new Bodega();
         bod = new Bodega();
         bodTemporal = new Bodega();
         bodTemporal = new Bodega();
     }
-    
+
+    public List<Bodega> cargaBodegas() {
+        bodegas = bodegaFacadeLocal.leerTodos();
+        return bodegas;
+    }
+
     //Registrar bodega
-    public void registrarBodega(){
+    public void registrarBodega() {
         try {
             bod.setExistencias(0);
             bodegaFacadeLocal.create(bod);
@@ -90,8 +94,9 @@ public class BodegaSesion implements Serializable{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de registro", "Error de registro"));
         }
     }
+
     //Recupera datos del bodega al cual se va a editar
-     public void guardarTemporal(Bodega b) {
+    public void guardarTemporal(Bodega b) {
         bodTemporal = b;
     }
 
@@ -106,20 +111,21 @@ public class BodegaSesion implements Serializable{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de edición", "Error de edición"));
         }
     }
+
     //Eliminar
-    public void eliminarBodega(Bodega b){
-        try{
+    public void eliminarBodega(Bodega b) {
+        try {
             bodegaFacadeLocal.remove(b);
             bodegas = bodegaFacadeLocal.leerTodos();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bodega eliminada", "Bodega eliminada"));
-        }catch(Exception e){
+        } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de eliminación", "Error de eliminación"));
         }
     }
-    
+
     public void cargarInicialDatos() {
         if (archivoCarga != null) {
-            if (archivoCarga.getSize()> 700000) {
+            if (archivoCarga.getSize() > 700000) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bodega eliminada", "Bodega eliminada"));
             } else if (archivoCarga.getContentType().equalsIgnoreCase("application/vnd.ms-excel")) {
 
@@ -133,11 +139,11 @@ public class BodegaSesion implements Serializable{
                     CSVReader reader = new CSVReaderBuilder(new FileReader("C:\\ubs\\recepcionista\\archivos\\" + archivoCarga.getSubmittedFileName())).withCSVParser(conPuntoyComa).build();
                     String[] nextline;
                     while ((nextline = reader.readNext()) != null) {
-                        
+
                         Bodega bogObj = bodegaFacadeLocal.validarSiExiste(nextline[0]);
                         if (bogObj == null) {
                             bodegaFacadeLocal.crearBodega(nextline[0], Integer.parseInt(nextline[1]));
-                        } else {        
+                        } else {
                             bodegaFacadeLocal.edit(bogObj);
                         }
 
@@ -174,7 +180,7 @@ public class BodegaSesion implements Serializable{
         PrimeFaces.current().executeScript("document.getElementById('resetform').click()");
 
     }
-    
+
     public void generarArchivo(String tipoArchivo) throws JRException, IOException {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext context = facesContext.getExternalContext();
@@ -237,9 +243,8 @@ public class BodegaSesion implements Serializable{
         }
 
     }
-    
-    //Getters y Setters
 
+    //Getters y Setters
     public Bodega getBodega() {
         return bodega;
     }
@@ -279,5 +284,5 @@ public class BodegaSesion implements Serializable{
     public void setArchivoCarga(Part archivoCarga) {
         this.archivoCarga = archivoCarga;
     }
-    
+
 }

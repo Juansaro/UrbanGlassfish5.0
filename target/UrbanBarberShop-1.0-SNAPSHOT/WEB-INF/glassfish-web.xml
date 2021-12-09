@@ -21,5 +21,6 @@
     <property name="keepgenerated" value="true">
       <description>Keep a copy of the generated servlet class' java code.</description>
     </property>
+    <property name="alternatedocroot_1" value="from=/images/* dir=/servidores/glassfish5/glassfish/domains/test/webapp" /> 
   </jsp-config>
 </glassfish-web-app>

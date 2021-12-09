@@ -352,7 +352,7 @@ public class UsuarioSesion implements Serializable {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El archivo es muy grande", "El archivo es muy grande"));
             } else if (archivoFoto.getContentType().equalsIgnoreCase("image/png") || archivoFoto.getContentType().equalsIgnoreCase("image/jpeg")) {
                 try (InputStream is = archivoFoto.getInputStream()) {
-                    File carpeta = new File("#{request.contextPath}\\webapp\\resources\\fotoperfil");
+                    File carpeta = new File("C:\\servidores\\glassfish5\\glassfish\\domains\\test\\webapp\\images");
 
                     String sCarpAct = System.getProperty("user.dir");
                     File carpetaLocal = new File(sCarpAct);

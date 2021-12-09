@@ -102,22 +102,29 @@
                     </div>
                     <h:form id="frmDetalle">
                         <div class="modal-body">
-                            Producto
-                            <h:commandButton class="btn btn-dark"
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <h3>Producto</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <h:commandButton class="btn btn-dark btn-lg btn-block mb-1"
                                              html5:data-toggle="modal"
                                              html5:data-target="#productos"
                                              value="Agregar producto" >
                                 <f:ajax render=":formActualizar"> </f:ajax>
                             </h:commandButton>
-                            Producto seleccionado:
-                            #{despachoSesion.producto.nombreProducto}
-                            Cantidad solicitada
+                            <br/>
+                            <h6 >Producto seleccionado: <b class="text-warning">#{despachoSesion.producto.nombreProducto}</b></h6>
+                            <br/>
+                            <h6 >Cantidad solicitada</h6>
                             <h:inputText value="#{despachoSesion.detalleDespachoIn.cantidadSolicitada}" required="true" html5:placeholder="Cantidad" class="form-control"/><br/>
 
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <h:commandButton action="#{despachoSesion.guardarDetallesTemporales()}" class="btn btn-primary" value="Editar.">
+                            <h:commandButton action="#{despachoSesion.guardarDetallesTemporales()}" class="btn btn-primary" value="Registrar">
                             </h:commandButton>
                         </div>
                     </h:form>
@@ -126,7 +133,7 @@
         </div>
 
         <div class="modal fade" id="productos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog" style="max-width: 60rem;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Selecciona un producto</h5>
@@ -137,37 +144,47 @@
                     <h:form id="formActualizar">
                         <div class="modal-body">
                             <div class="row">                                
-                                <c:forEach items="#{despachoSesion.productos}" var="prod" varStatus="act">
-                                    <div class="col-lg-4">
-                                        <h:commandLink
-                                            html5:data-toggle="modal"
-                                            html5:data-target="#exampleModalComprar" 
-                                            html5:data-dismiss="modal"
-                                            action ="#{despachoSesion.guardarProductoTemporal(prod)}">
+                                <c:forEach items="#{compraSesion.productosSolicitados}" var="prod" varStatus="act">
+                                    <div class="col-lg-6">
+                                        <div class="card text-dark m-2 shadow-lg">
                                             <div class="card text-dark">
                                                 <div class="card-header border-0">
-                                                    Nombre del producto
-                                                    <h3 class="card-title">#{prod.nombreProducto}</h3>
+                                                    <h5 class="card-title">Nombre del producto <b>#{prod.nombreProducto}</b></h5>
                                                 </div>
                                                 <div class="card-body">
-                                                    Descripcion
-                                                    <h4 class="card-title">#{prod.descripcion}</h4>
-                                                    Costo
-                                                    <h5 class="card-title">#{prod.precio}</h5>
-                                                    <!--No olvidar colocar foto aquí-->
+                                                    <h5 class="card-title">Descripción <b> #{prod.descripcion}</b></h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Precio <b> #{prod.precio}</b></h5>
                                                 </div>
                                             </div>
-                                            <f:ajax render=":frmDetalle"> </f:ajax>
-                                        </h:commandLink>
+                                            <div class="card-body">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col text-center">
+                                                            <h:commandLink
+                                                                class="btn btn-dark btn-lg btn-block"
+                                                                html5:data-toggle="modal"
+                                                                html5:data-target="#exampleModalComprar" 
+                                                                html5:data-dismiss="modal"
+                                                                action ="#{despachoSesion.guardarProductoTemporal(prod)}"
+                                                                value="Escoger">
+                                                                <f:ajax render=":frmDetalle"> </f:ajax>
+                                                            </h:commandLink>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </c:forEach>
                             </div>
-
                         </div>
                     </h:form>
                 </div>
             </div>
         </div>
+
     </ui:composition>
 </html>
 

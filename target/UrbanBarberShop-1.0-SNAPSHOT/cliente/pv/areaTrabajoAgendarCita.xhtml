@@ -114,9 +114,7 @@
                             <div class="row">                                
                                 <c:forEach items="#{citaSesion.listaServiciosAgendados}" var="ser" varStatus="act">
                                     <div class="col-lg-6">
-
                                         <div class="card text-dark m-2 shadow-lg">
-
                                             <p:graphicImage 
                                                 height="200px"
                                                 width="200px"
@@ -124,7 +122,6 @@
                                                 id="fotoPerfil"
                                                 value="/ImgServletServicio/#{ser.servicioFoto}"
                                                 />
-
                                             <div class="card-header border-0">
                                                 <h3 class="card-title">#{ser.nombre}</h3>
                                             </div>
@@ -132,7 +129,6 @@
                                                 <h5 class="card-title">#{ser.descripcion}</h5>
                                             </div>
                                             <div class="card-body">
-
                                                 <h6>$#{ser.costo}</h6>
                                             </div>
                                             <div class="card-body">
@@ -149,13 +145,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </c:forEach>
                             </div>
-
                         </div>
                     </h:form>
                 </div>
