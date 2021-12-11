@@ -84,7 +84,9 @@ com\barber\controller\RolRequest.class
 com\barber\utilidades\CitaMailRegistro$1.class
 com\barber\EJB\ProveedorFacade.class
 com\barber\model\Compra_.class
+com\barber\utilidades\SmsCitaFacturada.class
 com\barber\utilidades\MailBajaCalificacion.class
+com\barber\utilidades\MailCompraProveedor$1.class
 com\barber\model\DetalleDespacho_.class
 com\barber\model\Usuario_.class
 com\barber\utilidades\MailBajaCalificacion$1.class
@@ -106,6 +108,7 @@ com\barber\model\Despacho_.class
 com\barber\utilidades\envioMasivoServicios$1.class
 com\barber\utilidades\MailBuenaCalificacion$1.class
 com\barber\utilidades\MailMediaCalificacion.class
+com\barber\utilidades\MailCompraProveedor.class
 com\barber\model\Producto_.class
 com\barber\model\TipoTelefono.class
 com\barber\EJB\TipoIdentificacionFacade.class

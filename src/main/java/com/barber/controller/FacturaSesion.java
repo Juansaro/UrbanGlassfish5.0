@@ -11,6 +11,7 @@ import com.barber.model.Cita;
 import com.barber.model.EstadoAsignacion;
 import com.barber.model.Factura;
 import com.barber.utilidades.MailFactura;
+import com.barber.utilidades.SmsCitaFacturada;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;

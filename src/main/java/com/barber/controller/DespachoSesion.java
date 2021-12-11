@@ -93,7 +93,7 @@ public class DespachoSesion implements Serializable {
     public void guardarProductoTemporal(Producto prodIn) {
         producto = prodIn;
     }
-    
+
     public void guardarDetallesTemporales() {
         if (producto.getIdProducto() != null) {
             if (detalleDespachoIn.getCantidadSolicitada() != 0) {
@@ -138,32 +138,41 @@ public class DespachoSesion implements Serializable {
             des.setFechaSolicitud(ObtenerFechaActual());
             despachoFacadeLocal.create(des);
             idDespacho = des.getIdDespacho();
-            for (DetalleDespacho it : detalles) {
-                //Se obtiene los objetos guardados en el ArrayList detalles
-                detalleDespachoIn = detalles.get(contador);
-                //Se valida que la cantidad solicitada no supere el stock actual de productos
-                if (detalleDespachoIn.getCantidadSolicitada() <= detalleDespachoIn.getProductoIdProducto().getCantidad()) {
-                    //Clave primaria por defecto
-                    detalleDespachoIn.setIdDetalleDespacho(null);
-                    detalleDespachoIn.setDespachoIdDespacho(despacho);
-                    //Obtención de valores anteriores
-                    cantidadProdOld = detalleDespachoIn.getProductoIdProducto().getCantidad();
-                    cantidadBodOld = detalleDespachoIn.getProductoIdProducto().getBodegaIdBodega().getExistencias();
-                    //Resta de valores antiguos con nuevos
-                    cantidadProdNew = cantidadProdOld - detalleDespachoIn.getCantidadSolicitada();
-                    cantidadBodNew = cantidadBodOld - detalleDespachoIn.getCantidadSolicitada();
-                    //En los dos métodos a continuación se recoje con getters (todos son int) como argumento productoIdProducto().getIdProducto());
-                    despachoFacadeLocal.salidaBodega(cantidadBodNew, detalleDespachoIn.getProductoIdProducto().getBodegaIdBodega().getIdBodega());
-                    detalleDespachoFacadeLocal.registrarDetalle(detalleDespachoIn.getCantidadSolicitada(), detalleDespachoIn.getCostoTotal(), detalleDespachoIn.getProductoIdProducto().getIdProducto(), des.getIdDespacho());
-                    //detalleDespachoFacadeLocal.create(detalleDespachoIn);
-                } else {
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Solicitaste un valor mayor al stock de " + detalleDespachoIn.getProductoIdProducto().getNombreProducto(), "Solicitaste un valor mayor al stock de " + detalleDespachoIn.getProductoIdProducto().getNombreProducto()));
+            if (!detalles.isEmpty()) {
+                for (DetalleDespacho it : detalles) {
+                    //Se obtiene los objetos guardados en el ArrayList detalles
+                    detalleDespachoIn = detalles.get(contador);
+                    //Se valida que la cantidad solicitada no supere el stock actual de productos
+                    if (detalleDespachoIn.getCantidadSolicitada() <= detalleDespachoIn.getProductoIdProducto().getCantidad()) {
+                        //Clave primaria por defecto
+                        detalleDespachoIn.setIdDetalleDespacho(null);
+                        detalleDespachoIn.setDespachoIdDespacho(despacho);
+                        //Obtención de valores anteriores
+                        cantidadProdOld = detalleDespachoIn.getProductoIdProducto().getCantidad();
+                        cantidadBodOld = detalleDespachoIn.getProductoIdProducto().getBodegaIdBodega().getExistencias();
+                        //Resta de valores antiguos con nuevos
+                        cantidadProdNew = cantidadProdOld - detalleDespachoIn.getCantidadSolicitada();
+                        cantidadBodNew = cantidadBodOld - detalleDespachoIn.getCantidadSolicitada();
+                        //En los dos métodos a continuación se recoje con getters (todos son int) como argumento productoIdProducto().getIdProducto());
+                        despachoFacadeLocal.salidaBodega(cantidadBodNew, detalleDespachoIn.getProductoIdProducto().getBodegaIdBodega().getIdBodega());
+                        detalleDespachoFacadeLocal.registrarDetalle(detalleDespachoIn.getCantidadSolicitada(), detalleDespachoIn.getCostoTotal(), detalleDespachoIn.getProductoIdProducto().getIdProducto(), des.getIdDespacho());
+                        //detalleDespachoFacadeLocal.create(detalleDespachoIn);
+                    } else {
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Solicitaste un valor mayor al stock de " + detalleDespachoIn.getProductoIdProducto().getNombreProducto(), "Solicitaste un valor mayor al stock de " + detalleDespachoIn.getProductoIdProducto().getNombreProducto()));
+                        cantidadProdOld = 0;
+                        cantidadBodOld = 0;
+                        cantidadProdNew = 0;
+                        cantidadBodNew = 0;
+                    }
+                    contador++;
                     cantidadProdOld = 0;
                     cantidadBodOld = 0;
                     cantidadProdNew = 0;
                     cantidadBodNew = 0;
                 }
-                contador++;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Despacho registrado", "Despacho registrado"));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "No has seleccionado ningún producto", "No has seleccionado ningún producto"));
                 cantidadProdOld = 0;
                 cantidadBodOld = 0;
                 cantidadProdNew = 0;
@@ -172,7 +181,7 @@ public class DespachoSesion implements Serializable {
             indiceTemporal = 0;
             detalleDespachoIn = new DetalleDespacho();
             des = new Despacho();
-            detalles = new ArrayList<>();
+            detalles.clear();
             despachoProductos = despachoFacadeLocal.leerTodos();
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error de registro", "Error de registro"));
@@ -182,7 +191,7 @@ public class DespachoSesion implements Serializable {
     public void consultarDetallesRegistrados(Despacho d) {
         detallesSolicitados = detalleDespachoFacadeLocal.leerTodos(d);
     }
-    
+
     //Guardar temportal
     public void guardarTemporal(Despacho d) {
         desTemporal = d;

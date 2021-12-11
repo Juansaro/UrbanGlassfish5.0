@@ -5,6 +5,7 @@ C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barbe
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\TipoIdentificacionFacade.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\controller\CitaSesion.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\utilidades\CitaMailCompletado.java
+C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\utilidades\MailCompraProveedor.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\TipoTelefonoFacadeLocal.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\TipoIdentificacionFacadeLocal.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\utilidades\CitaMailCancelado.java
@@ -27,6 +28,7 @@ C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barbe
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\controller\DespachoSesion.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\EJB\DespachoFacade.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\utilidades\ImgServletServicio.java
+C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\utilidades\SmsCitaFacturada.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\model\Factura.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\utilidades\MailBajaCalificacion.java
 C:\Users\juan\Documents\NetBeansProjects\UrbanBarberShop\src\main\java\com\barber\controller\ProductoView.java

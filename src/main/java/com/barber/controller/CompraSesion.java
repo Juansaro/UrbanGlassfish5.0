@@ -103,23 +103,28 @@ public class CompraSesion implements Serializable {
     public void guardarDetallesTemporales() {
         if (productoIn.getIdProducto() != null) {
             if (detalleIn.getCantidadSolicitada() != 0) {
-                indiceTemporal++;
-                detalleIn.setNumeroDetalle(indiceTemporal);
-                detalleIn.setProductoIdProducto(productoIn);
-                detalleIn.setFechaRecibido(ObtenerFechaActual());
-                //Parseo de Integer a float para poder hacer el calculo de cantidades * costo del producto
-                Integer parse = detalleIn.getCantidadSolicitada();
-                float cantidadParseada = parse.floatValue();
-                //Cálculo
-                float acum = 0;
-                acum = acum + cantidadParseada * detalleIn.getProductoIdProducto().getPrecio();
-                detalleIn.setCostoTotal(acum);
-                //Agregación
-                acumuladorCostoTotal = acumuladorCostoTotal + acum;
-
-                detalles.add(detalleIn);
-                detalleIn = new DetalleCompra();
-                productoIn = new Producto();
+                if (detalleIn.getCantidadSolicitada() <= productoIn.getCantidad()) {
+                    indiceTemporal++;
+                    detalleIn.setNumeroDetalle(indiceTemporal);
+                    detalleIn.setProductoIdProducto(productoIn);
+                    detalleIn.setFechaRecibido(ObtenerFechaActual());
+                    //Parseo de Integer a float para poder hacer el calculo de cantidades * costo del producto
+                    Integer parse = detalleIn.getCantidadSolicitada();
+                    float cantidadParseada = parse.floatValue();
+                    //Cálculo
+                    float acum = 0;
+                    acum = acum + cantidadParseada * detalleIn.getProductoIdProducto().getPrecio();
+                    detalleIn.setCostoTotal(acum);
+                    //Agregación
+                    acumuladorCostoTotal = acumuladorCostoTotal + acum;
+                    detalles.add(detalleIn);
+                    detalleIn = new DetalleCompra();
+                    productoIn = new Producto();
+                } else {
+                    detalleIn = new DetalleCompra();
+                    productoIn = new Producto();
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "La cantidad que elegiste es mayor a la del stock actual", "La cantidad que elegiste es mayor a la del stock actual"));
+                }
             } else {
                 detalleIn = new DetalleCompra();
                 productoIn = new Producto();
@@ -171,7 +176,7 @@ public class CompraSesion implements Serializable {
                             com.getNumeroProveedor().getCorreo(),
                             com.getFechaSolicitud(),
                             acumuladorCostoTotal,
-                            detalles    
+                            detalles
                     );
                     contador = 0;
                     limpiezaCompra();
